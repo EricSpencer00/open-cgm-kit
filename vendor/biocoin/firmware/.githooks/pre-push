@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+HOOK_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+FIRMWARE_DIR=$(CDPATH= cd -- "$HOOK_DIR/.." && pwd)
+cd "$FIRMWARE_DIR"
+
+echo "pre-push: building debug and release firmware..."
+
+echo "pre-push: running sanity checks..."
+sh "scripts/sanity_checks.sh"
+echo "pre-push: running sensor mode smoke checks..."
+sh "scripts/smoke_sensor_modes.sh"
+
+sh "scripts/build_firmware_artifacts.sh"
+
+if [ -n "$(git status --porcelain -- "builds")" ]; then
+  echo "pre-push: firmware build artifacts changed during push validation." >&2
+  echo "pre-push: commit builds and run git push again." >&2
+  exit 1
+fi
+
+echo "pre-push: build and artifact sync complete."

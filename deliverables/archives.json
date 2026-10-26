@@ -1,0 +1,17 @@
+[
+  {
+    "name": "open-cgm-kit-A0.zip",
+    "bytes": 63065464,
+    "sha256": "ff6eb719a20c754d92ea350af4cc1e4b9dcc6371d95b47ef01c8a479e7755a38"
+  },
+  {
+    "name": "enclosure-fit-print-A0.zip",
+    "bytes": 87635,
+    "sha256": "40847ac460042577f9933d139e311eaf2a45e15e816c6f94d314b9bc8980a01d"
+  },
+  {
+    "name": "sensor-fabrication-RFQ-A0.zip",
+    "bytes": 229805,
+    "sha256": "7cb655e7106d46cf0904291673a08fd76fb89a4729c1d1e939c609a50520cac8"
+  }
+]

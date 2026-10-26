@@ -1,0 +1,38 @@
+{
+  "revision": "A0",
+  "units": "mm",
+  "status": "prototype geometry; supplier DFM and physical fit pending",
+  "coupon": {
+    "width": 12.0,
+    "length": 40.0,
+    "substrate_thickness": 0.125,
+    "tail_width": 10.5,
+    "tail_length": 6.0,
+    "contact_count": 20,
+    "contact_pitch": 0.5,
+    "contact_width": 0.35,
+    "contact_length": 3.0,
+    "contact_y": 2.0,
+    "mated_tail_thickness": 0.30,
+    "trace_width": 0.20,
+    "working_electrode": {"pin": 14, "net": "WE1", "material": "Pt", "x": 8.5, "y": 33.0, "diameter": 1.2},
+    "reference_electrode": {"pin": 7, "net": "RE0", "material": "Ag/AgCl", "x": 3.3, "y": 33.0, "width": 1.2, "height": 3.0},
+    "counter_electrode": {"pin": 8, "net": "CE0", "material": "Pt", "x": 5.5, "y": 33.0, "width": 1.4, "height": 6.0}
+  },
+  "housing": {
+    "flange_width": 48.0,
+    "flange_height": 42.0,
+    "flange_radius": 7.0,
+    "floor_thickness": 1.6,
+    "outer_diameter": 34.0,
+    "inner_diameter": 28.6,
+    "wall_height": 8.0,
+    "lid_thickness": 1.6,
+    "screw_clearance_diameter": 2.8,
+    "slot_width": 12.8,
+    "slot_height": 1.0,
+    "board_envelope_diameter": 26.0,
+    "screw_centers": [[6.0,21.0],[42.0,21.0]]
+  },
+  "pad": {"width": 56.0, "height": 50.0, "radius": 12.0, "center_opening_diameter": 10.0}
+}

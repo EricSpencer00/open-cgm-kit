@@ -1,0 +1,106 @@
+use "synthetic_fixtures.rz";
+
+fn expect_status(SensorSample sample, Calibration cal, int max_age_ms, string status) {
+    let result = evaluate(sample, cal, max_age_ms);
+    assert(result.status == status, "unexpected evaluation status");
+    if status != "ready" {
+        assert(result.has_glucose == false, "unavailable sample exposed glucose");
+        assert(result.glucose_mgdl == -1, "unavailable glucose sentinel");
+        assert(result.calibration_id == 0, "unavailable calibration id");
+    }
+}
+
+fn expect_glucose(int current_pa, Calibration cal, int expected) {
+    let sample = synthetic_sample(current_pa, 37000, 0, 2);
+    let result = evaluate(sample, cal, 300000);
+    assert(result.status == "ready", "ready status");
+    assert(result.has_glucose, "missing calibrated glucose");
+    assert(result.glucose_mgdl == expected, "incorrect interpolation");
+    assert(result.calibration_id == cal.id, "calibration provenance");
+}
+
+fn run_tests() {
+    let cal = synthetic_calibration();
+    expect_glucose(-200, cal, 40);
+    expect_glucose(3400, cal, 400);
+    expect_glucose(1600, cal, 220);
+    expect_glucose(305, cal, 91);
+
+    let negative = synthetic_calibration();
+    negative.low_current_pa = 200;
+    negative.high_current_pa = -3400;
+    expect_glucose(200, negative, 40);
+    expect_glucose(-3400, negative, 400);
+    expect_glucose(-1600, negative, 220);
+
+    let wide = synthetic_calibration();
+    wide.low_current_pa = -1000000000;
+    wide.high_current_pa = 1000000000;
+    wide.low_glucose_mgdl = 1;
+    wide.high_glucose_mgdl = 1000;
+    expect_glucose(-1000000000, wide, 1);
+    expect_glucose(1000000000, wide, 1000);
+    expect_glucose(0, wide, 501);
+
+    expect_status(synthetic_sample(1600, 37000, 300000, 2), cal, 300000, "ready");
+    expect_status(synthetic_sample(1600, 37000, 300001, 2), cal, 300000, "stale");
+    expect_status(synthetic_sample(1600, 37000, -1, 2), cal, 300000, "invalid_sample");
+    expect_status(synthetic_sample(1600, 35000, 0, 2), cal, 300000, "ready");
+    expect_status(synthetic_sample(1600, 39000, 0, 2), cal, 300000, "ready");
+    expect_status(synthetic_sample(1600, 34999, 0, 2), cal, 300000, "outside_temperature_calibration");
+    expect_status(synthetic_sample(1600, 39001, 0, 2), cal, 300000, "outside_temperature_calibration");
+    expect_status(synthetic_sample(-201, 37000, 0, 2), cal, 300000, "outside_current_calibration");
+    expect_status(synthetic_sample(3401, 37000, 0, 2), cal, 300000, "outside_current_calibration");
+    expect_status(synthetic_sample(-3401, 37000, 0, 2), negative, 300000, "outside_current_calibration");
+    expect_status(synthetic_sample(1600, 37000, 0, 0), cal, 300000, "sensor_offline");
+    expect_status(synthetic_sample(1600, 37000, 0, 1), cal, 300000, "warmup");
+    expect_status(synthetic_sample(1600, 37000, 0, 3), cal, 300000, "sensor_fault");
+    expect_status(synthetic_sample(1600, 37000, 0, 4), cal, 300000, "invalid_sample");
+    expect_status(synthetic_sample(1000000001, 37000, 0, 2), cal, 300000, "invalid_sample");
+    expect_status(synthetic_sample(-1000000001, 37000, 0, 2), cal, 300000, "invalid_sample");
+    expect_status(synthetic_sample(1600, 85001, 0, 2), cal, 300000, "invalid_sample");
+    expect_status(synthetic_sample(1600, -40001, 0, 2), cal, 300000, "invalid_sample");
+    expect_status(synthetic_sample(1600, 37000, 0, 2), cal, 0, "invalid_configuration");
+    expect_status(synthetic_sample(1600, 37000, 0, 2), cal, 3600001, "invalid_configuration");
+
+    let disabled = synthetic_calibration();
+    disabled.enabled = false;
+    expect_status(synthetic_sample(1600, 37000, 0, 2), disabled, 300000, "uncalibrated");
+    let missing_id = synthetic_calibration();
+    missing_id.id = 0;
+    expect_status(synthetic_sample(1600, 37000, 0, 2), missing_id, 300000, "uncalibrated");
+    let flat = synthetic_calibration();
+    flat.high_current_pa = flat.low_current_pa;
+    expect_status(synthetic_sample(1600, 37000, 0, 2), flat, 300000, "invalid_calibration");
+    let reversed = synthetic_calibration();
+    reversed.high_glucose_mgdl = 39;
+    expect_status(synthetic_sample(1600, 37000, 0, 2), reversed, 300000, "invalid_calibration");
+    let bad_temp = synthetic_calibration();
+    bad_temp.min_temp_mc = 40000;
+    expect_status(synthetic_sample(1600, 37000, 0, 2), bad_temp, 300000, "invalid_calibration");
+    let bad_sequence = synthetic_sample(1600, 37000, 0, 2);
+    bad_sequence.sequence = 4294967296;
+    expect_status(bad_sequence, cal, 300000, "invalid_sample");
+    bad_sequence.sequence = -1;
+    expect_status(bad_sequence, cal, 300000, "invalid_sample");
+    bad_sequence.sequence = 4294967295;
+    expect_status(bad_sequence, cal, 300000, "ready");
+
+    assert(effective_age_ms(100, 1000, 1100, 200) == 200, "age exact boundary");
+    assert(effective_age_ms(100, 1000, 1101, 200) == 201, "age advances after receipt");
+    assert(effective_age_ms(201, 1000, 1000, 200) == 201, "already stale");
+    assert(effective_age_ms(0, 1000, 999, 200) == -1, "clock reset");
+    assert(effective_age_ms(-1, 1000, 1000, 200) == -1, "negative age");
+    assert(effective_age_ms(0, -1, 1000, 200) == -1, "invalid receipt time");
+    assert(effective_age_ms(0, 0, 9223372036854775807, 200) == 201, "large elapsed time");
+    assert(effective_age_ms(0, 0, 0, 0) == -1, "invalid age policy");
+    assert(mmol_l_tenths(0) == 0, "zero conversion");
+    assert(mmol_l_tenths(40) == 22, "low conversion");
+    assert(mmol_l_tenths(90) == 50, "90 mgdl conversion");
+    assert(mmol_l_tenths(180) == 100, "180 mgdl conversion");
+    assert(mmol_l_tenths(400) == 222, "high conversion");
+    assert(mmol_l_tenths(1000) == 555, "conversion bound");
+    println("Synthetic Resilient core checks passed");
+}
+
+run_tests();

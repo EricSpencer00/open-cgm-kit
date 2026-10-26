@@ -1,0 +1,25 @@
+use "glucose_core.rz";
+
+// Invented coefficients exercise software. They are not a sensor recipe.
+fn synthetic_calibration() -> Calibration {
+    return new Calibration {
+        enabled: true,
+        id: 1,
+        low_current_pa: -200,
+        high_current_pa: 3400,
+        low_glucose_mgdl: 40,
+        high_glucose_mgdl: 400,
+        min_temp_mc: 35000,
+        max_temp_mc: 39000,
+    };
+}
+
+fn synthetic_sample(int current_pa, int temp_mc, int age_ms, int state) -> SensorSample {
+    return new SensorSample {
+        sequence: 1,
+        raw_current_pa: current_pa,
+        temp_mc: temp_mc,
+        age_ms: age_ms,
+        sensor_state: state,
+    };
+}

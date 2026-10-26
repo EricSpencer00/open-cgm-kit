@@ -1,0 +1,1727 @@
+{
+  "revision": "A0",
+  "status": "review and supplier RFQ; no hardware fabricated",
+  "upstream_commit": "f723798118bb4f4d152acadf828b9ed18f3ca884",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 151,
+      "sha256": "6c173b09520bdd4b731791dcfd2831f9524de9e683dcc52a957a128aec8cc4b7"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 78,
+      "sha256": "f200bdaf670e5c95b61bda7f8ca86913131e82ef639be6e8425e4e87ef0c15b4"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 811,
+      "sha256": "b0051ac740105b68c44de523cf6fc4bc48b59f96ca9725a06e1c96ab2c454d8b"
+    },
+    {
+      "path": "LICENSES/CC-BY-4.0.txt",
+      "bytes": 17023,
+      "sha256": "d557539df68e771cc1eedcc91d13f70fca930e508d11eedcafa4b15db49e3744"
+    },
+    {
+      "path": "LICENSES/CERN-OHL-W-2.0.txt",
+      "bytes": 14529,
+      "sha256": "c1432111d0aeefc9d1ced8105d2d4ed07d5dcb1fd43abb5d4616c4f9ef96e08f"
+    },
+    {
+      "path": "LICENSES/MIT.txt",
+      "bytes": 1069,
+      "sha256": "81ba790ba1986f397f22f47022b6a2e818452181bd0b45f702a3bf3b3ff59750"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5425,
+      "sha256": "4253714e331df922a184c267aeae7b75e9d76a6123b7233df0dd9b9730d3cf93"
+    },
+    {
+      "path": "docs/ATTRIBUTION.md",
+      "bytes": 1719,
+      "sha256": "366d6ce345a113768e70e6346dd17edf18ac059c5bdbb683be63c8fc99c72b8e"
+    },
+    {
+      "path": "docs/COST_AND_BOX.md",
+      "bytes": 4776,
+      "sha256": "65c85982b6d224b6a6b7ef7343aa30d9ac561f24eea1caa5f4cda420b5225288"
+    },
+    {
+      "path": "docs/FABRICATION.md",
+      "bytes": 17210,
+      "sha256": "51a3fe4a4b03fb0ccd3ea555a95d8caaca17ee62d7241fff5856707c9878e459"
+    },
+    {
+      "path": "docs/OPEN_HARDWARE_CATALOG.md",
+      "bytes": 17910,
+      "sha256": "7a92700f569d4939ade89750413db613427a508b88fd2c6d010d01651429dc66"
+    },
+    {
+      "path": "docs/PRINT_JOB.md",
+      "bytes": 2218,
+      "sha256": "df3a9e80e63acfca81bab95d45b1ee685e05e65e3866ac1fbf344aaf0a59bfa5"
+    },
+    {
+      "path": "docs/RELEASE_STATUS.md",
+      "bytes": 4082,
+      "sha256": "f34141b32a7e051d1eccf2d42845c8a2bf418ea49c52e3edc4166ba736e71f59"
+    },
+    {
+      "path": "docs/SENSOR_PROCESS.md",
+      "bytes": 14494,
+      "sha256": "06731934dd4e77cb7fd643f7fb5266f305fea60919e03fc724278a477a590c99"
+    },
+    {
+      "path": "hardware/electrode_A0.kicad_pcb",
+      "bytes": 3695,
+      "sha256": "9daf832c89b7ace661fab54cff9332614bb955222cc728b7634b0e97378f9235"
+    },
+    {
+      "path": "hardware/electrode_A0.svg",
+      "bytes": 6861,
+      "sha256": "1d8ed583e58490133e2474e21efdce431cb1729df71e86f08e465bca60c60f8a"
+    },
+    {
+      "path": "hardware/electrode_A0_drawing.png",
+      "bytes": 182836,
+      "sha256": "183f58d08df19dbf0a577fc2a5a5295a8603ce9dea85ff3d644148d861f67885"
+    },
+    {
+      "path": "hardware/electrode_A0_drawing.svg",
+      "bytes": 144622,
+      "sha256": "fe8ab0865f48d4751790c6fb50bc4f26c8c47ac046c8b03f9471a0c3071ddd66"
+    },
+    {
+      "path": "hardware/electrode_A0_layers.dxf",
+      "bytes": 21891,
+      "sha256": "fc4431244900709eeba9929e73240368e7ce69e4929f271cd35d33d95b93705f"
+    },
+    {
+      "path": "mechanical/generated/adhesive_pad_diecut_A0.dxf",
+      "bytes": 6041,
+      "sha256": "6d44a02dbd79fc94f49d699293d26166f5ec168abb61f35674240338d27b1f61"
+    },
+    {
+      "path": "mechanical/generated/adhesive_pad_diecut_A0.svg",
+      "bytes": 3262,
+      "sha256": "bee3a4588ad0dea9606003d9fd4e6feb90edd12006adb4e1ca0e6a77f56a48fb"
+    },
+    {
+      "path": "mechanical/generated/base_fit_prototype.stl",
+      "bytes": 212484,
+      "sha256": "60ce4e4ddaa98afa2063ea981f94771459587871a436f5eef429055c3b690a0f"
+    },
+    {
+      "path": "mechanical/generated/design_preview.png",
+      "bytes": 145294,
+      "sha256": "ad8cefd3fe42dfae824d65f651336bf140858bb834f020840bb7906d22ad5e34"
+    },
+    {
+      "path": "mechanical/generated/electrode_substrate_envelope.stl",
+      "bytes": 1484,
+      "sha256": "5478545faef1dbc742da52e80c041e3aa160539002c939cc227d9e6bc128198d"
+    },
+    {
+      "path": "mechanical/generated/geometry_validation.json",
+      "bytes": 1595,
+      "sha256": "3ca37f70935e8f51f8969e8bd8e224900de501655e7d4bbdb32c04e01fc527cd"
+    },
+    {
+      "path": "mechanical/generated/lid_fit_prototype.stl",
+      "bytes": 84284,
+      "sha256": "f2883a14ee204b339808d8df0cb140a72d3e9e9e5280cec370df1613fe02dfb3"
+    },
+    {
+      "path": "mechanical/open_cgm_A0.scad",
+      "bytes": 1508,
+      "sha256": "fc76c4441b374416a4f0ded8a8a7d6048374ab479f661e4394ee8a0d5ac57a62"
+    },
+    {
+      "path": "mechanical/parameters.json",
+      "bytes": 1283,
+      "sha256": "ce9ab3bba3a7f23e154dfc9a248b2dba329f60eac02cda3f14e992ade03730ef"
+    },
+    {
+      "path": "software/README.md",
+      "bytes": 1347,
+      "sha256": "1d011c5fe9fa09404cc5596e9f3881dde7525bc418a7557e6fd132828c7503ee"
+    },
+    {
+      "path": "software/bridge/README.md",
+      "bytes": 4713,
+      "sha256": "1ff418547e3d255063131f69b0fe79bfdd3399fb9c0341c666d985c410445a30"
+    },
+    {
+      "path": "software/bridge/biocoin_bridge.py",
+      "bytes": 14647,
+      "sha256": "985f7dd35283600120c2c147741461425f18a249869ae3670299eb32f148aa95"
+    },
+    {
+      "path": "software/bridge/requirements.txt",
+      "bytes": 15,
+      "sha256": "908f9fa6f957857ad3ee962bae322fde336746089742d88ccc1ff10d23507a6a"
+    },
+    {
+      "path": "software/bridge/test_biocoin_bridge.py",
+      "bytes": 8873,
+      "sha256": "b8e541079ccab54b0f4f0141e153e8908c8e3a6624a0842cecf52f52a2f9ab6d"
+    },
+    {
+      "path": "software/resilient/README.md",
+      "bytes": 4200,
+      "sha256": "8036c0806d8e80d5f492ae62705acd113be72777facaf9e68ad9b890362c4a77"
+    },
+    {
+      "path": "software/resilient/core_tests.rz",
+      "bytes": 5759,
+      "sha256": "c3a754a8ae5d0bfa3c86f932adf7ddc1c4c994da310a164546256608a318f9cb"
+    },
+    {
+      "path": "software/resilient/demo.rz",
+      "bytes": 603,
+      "sha256": "87ebfb26138b62360109a641e3fa91bd74a58819cf062f7478d92fb08a1fc694"
+    },
+    {
+      "path": "software/resilient/glucose_core.rz",
+      "bytes": 5040,
+      "sha256": "383e40582f59953882c3f8e421dcf7146866340fbcdfdb71df747d517117a633"
+    },
+    {
+      "path": "software/resilient/run_checks.sh",
+      "bytes": 339,
+      "sha256": "4ee8338150e2e0e169259caf014f2437ebfd596a4b4ff2ff1af4f4eea55a952c"
+    },
+    {
+      "path": "software/resilient/synthetic_fixtures.rz",
+      "bytes": 663,
+      "sha256": "d2ed901e6caecfae799b81c01a07e332c94d4135e5aa3a43981f291f1711ea9e"
+    },
+    {
+      "path": "tools/generate_cad.py",
+      "bytes": 20814,
+      "sha256": "fdf7c66099df1aa11aeaf6c521e134051e37645eaea5ce9d3fbae8ebc5b21c73"
+    },
+    {
+      "path": "tools/package_release.py",
+      "bytes": 2921,
+      "sha256": "a0764c92de5450430e34b7e3c03753083313e77956e438597bd67f64bc538ac6"
+    },
+    {
+      "path": "tools/requirements-cad.txt",
+      "bytes": 71,
+      "sha256": "3e02eab39bfc682734e7b39b1f82d1d7839014791cd90ab2a6de59454088d617"
+    },
+    {
+      "path": "vendor/biocoin/LICENSE",
+      "bytes": 1180,
+      "sha256": "dbfd203175dedcde2b51f705255bfe9fb5cbc5e6e8563e5869636bfd3bfaf973"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/Schematic.PDF",
+      "bytes": 773172,
+      "sha256": "14585457d1dcb14ffb0ee2aec7e86b3258abd044c25d56acb84a82dbb5c48b8b"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/assembly/BOM_Final_Biocoin_v1.3_AVDD=3.0V.xlsx",
+      "bytes": 15834,
+      "sha256": "bd3d19e9a055599f65ab877859132699ac2b124e48e4ed96257672123dab7f5d"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/assembly/BOM_Final_Biocoin_v1.3_AVDD=3.6V.xlsx",
+      "bytes": 15824,
+      "sha256": "6d70bdfbba413bc6937be83f0a6141daa54ad22d9b1399e32904c32abde6dc4e"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/assembly/Pick_and_Place_Assembly_Biocoin_v1.3.txt",
+      "bytes": 23408,
+      "sha256": "b3169aa275b5d03533621c63b09148b3124541a8febf083f042d2ba2ac603b9b"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/AFE.Harness",
+      "bytes": 62,
+      "sha256": "57256e5f148c8262d34dde0b69c890207317d274b5609055e1173b6b7517cd11"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/AFE.SchDoc",
+      "bytes": 303616,
+      "sha256": "491f2b22ebc989d8d19444497f99d7f72035c020c381b635fa2f70b2564dd90d"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/Biocoin_v1.3.PcbDoc",
+      "bytes": 3661824,
+      "sha256": "c2c1e6f4e0a274dc5e4358ece9520d669fb800c6e107b6e5489bfa5c956518ea"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/Biocoin_v1.3.PrjPcb",
+      "bytes": 49138,
+      "sha256": "5dc5768df5b93f3550e12f927fecf5ad6a9f353f7c4de671598cd91564db2afb"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/Current_Source.Harness",
+      "bytes": 13,
+      "sha256": "621aa06230f748c82a30145893cd035cae68fd1e486be2692dc6ee36c6a390d4"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/Current_Source.SchDoc",
+      "bytes": 115712,
+      "sha256": "7b8c315b096b74c1880bd5ff45d2f14c0c9653046be93f8fbcd356a109035825"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/Job1.OutJob",
+      "bytes": 18375,
+      "sha256": "95d491791a0b555d92cccd82dc48a64fc1f56a498cbf839ee7df2564af84a628"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/MCU_BLE_Module.Harness",
+      "bytes": 75,
+      "sha256": "7a014fcc5ce8a61a5860dd26b3b2db7306cb47d07af0b10f588e4da107e4d189"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/MCU_BLE_Module.SchDoc",
+      "bytes": 146944,
+      "sha256": "a1f9c1fe9efac871eb730d4a3017885d7c1dd6a2b387a1784a302c3099a9a7d4"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/design/Power Management.SchDoc",
+      "bytes": 200192,
+      "sha256": "0583787b6859bcce6bdba8421fce959d25d93127e24fb3ef39b310c02a9c727a"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3-macro.APR_LIB",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.DRR",
+      "bytes": 1816,
+      "sha256": "50c8ff65dd615c848fa1e840c9c61667aeb392f6b6a92b6a536756a221db86ea"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.EXTREP",
+      "bytes": 1903,
+      "sha256": "40002b17345c35756401d85d696e9362ba3322692fda6668d3131fdd86e28839"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.G1",
+      "bytes": 39886,
+      "sha256": "2733019106232c4c291aeba9c53f7834579f764389f60fac493a77179bc8acb7"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.G2",
+      "bytes": 8736,
+      "sha256": "acf03249d8bf2bbaf07313f4d9519f8c79ff07ba13b44f3af238703120b09cb8"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.G3",
+      "bytes": 18862,
+      "sha256": "a9e85f8654c6db46fecd189cecc8b2985a98abe92e51d7ca09e90d8f185bd62e"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.G4",
+      "bytes": 30056,
+      "sha256": "eec233d55acda9c2bded348e88cdab3dce4b58302c65e3be8263a19cac52f73e"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GBL",
+      "bytes": 15950,
+      "sha256": "61fb5a9b899a6e317d27601327ade3e38051c0d66e536203854af969b5bfa49d"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GBO",
+      "bytes": 66332,
+      "sha256": "364f40b0358000de854e187679d23f17ce5331a242b8af1c29ad14068eb999a5"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GBP",
+      "bytes": 1494,
+      "sha256": "ca5f703862b8a0df742b4e9fa25e1b23b5838c030bc54064d8e7aac1a9fcde72"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GBS",
+      "bytes": 1566,
+      "sha256": "4fd76642033fd735e7f350539a765ef6557387e297e809832ee73c9249998d13"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GKO",
+      "bytes": 2117,
+      "sha256": "c679e09922d2d70a53ef9edf4bfe5d52eb96a315111b17eff114ec65edbc4186"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GM1",
+      "bytes": 287,
+      "sha256": "ac72a93baa2e51f7b7f6d829fc6f9146b19ec336883b03a29f2a805a35d6c7f1"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GM13",
+      "bytes": 25124,
+      "sha256": "beacc52d30444dcafbe479a353900e9d28acdaed41ef5dafbe6d976e708a9ff7"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GM15",
+      "bytes": 3782,
+      "sha256": "a6cf9e2e44b2c55d0ee8d2450e7570e7572fef0558721da966c7d59288738c8a"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GM2",
+      "bytes": 1549,
+      "sha256": "029910810312d55e19de26820b3d918c1065b425f596b114d0d650069c17a4f8"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GM29",
+      "bytes": 1892,
+      "sha256": "f5e92c0fb1f2c76ba68ebfaec471d0b7f15bba6eed28e32333c942a61a85d505"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GM3",
+      "bytes": 2483,
+      "sha256": "9d6abe3282a908df4e44cb3f9a7506f51b3a46707e2f602915d6f3e09f81fe28"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GPB",
+      "bytes": 1563,
+      "sha256": "44ca678123eb668969980c831a1d194ecb01a5548e185998c10a5d10ff1c8a70"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GPT",
+      "bytes": 9054,
+      "sha256": "d10ff2b630edb4b7b56d24c4d3b1891126dedc9be471a0c55fc0dabe0698da66"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GTL",
+      "bytes": 82877,
+      "sha256": "2ac189f28043da08e16cc2bda887f1183d0e2fb9278eff189095e5a4e807fd4d"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GTO",
+      "bytes": 3399,
+      "sha256": "222791e7ae42476a54ba7f4a0003513a15bcbbcc1780bdcb06ddf34cfeefa36c"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GTP",
+      "bytes": 9386,
+      "sha256": "07c95fc109aec1021404c2aa9bfc790984f2f4cd377731b21720d29ea798a6dd"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.GTS",
+      "bytes": 9883,
+      "sha256": "016bef0e248ac4a1fa3d8c10499c920378aab128b080ed5bf1e815ae5cc7137b"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.LDP",
+      "bytes": 193,
+      "sha256": "497d6f024bf9f2af5fd0134cdfa3eaf45a57bcde81f242dfd47d8e80150e2c88"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.REP",
+      "bytes": 8287,
+      "sha256": "c9a2faa600a3dc71ffbf3ad5c3c54f8cb4bbee79620ab7bbc3671cfbde1ad56c"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.RUL",
+      "bytes": 517,
+      "sha256": "8fcd282f201d8ea47630f316f84cd449b3e33ed5ccc8b3c236b88a2f7d5cc247"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.TXT",
+      "bytes": 3116,
+      "sha256": "5ae6b5732bcabef6fb39b6259f68fe83276516a5f52627cabcdcfc75d7a4c2ee"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Biocoin/gerber/Biocoin_v1.3.apr",
+      "bytes": 8400,
+      "sha256": "affec32227e7b7419816c6302b5773a708b8f53fc55f098de514b4bab956e64c"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/Schematic.PDF",
+      "bytes": 358887,
+      "sha256": "b4f8882cf3234605de68fcc44f3061860aae64d3835d83333f00ffc8d10bb3d5"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/assembly/BOM_Final_DockingStation_v1.0.xlsx",
+      "bytes": 13024,
+      "sha256": "6b84b8620206f46a486d1557de4a2bd1bf154a4706ff968e62ce21a434dd7568"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/assembly/Pick_and_Place_Assembly_DockingStation_v1.0.txt",
+      "bytes": 13883,
+      "sha256": "6615ebcac01220f037c7ecf36ec5c1d73999ff58309c19b76b2ab864332b8d1e"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/design/ANALOG_DATA.SchDoc",
+      "bytes": 150016,
+      "sha256": "d08f76d7d0793742e1507bed5821ac41b875aebd92199054b572b6a2b28359d7"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/design/Biocoin_Motherboard.PcbDoc",
+      "bytes": 2984960,
+      "sha256": "e3a450f6f604567caa816dc33c021d8b768e00a0b73bba6d1d2a7a1ef67621a1"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/design/Biocoin_Motherboard.html",
+      "bytes": 4127,
+      "sha256": "076eac485181298f9b4d652cf05165d2aea7f2e97e2119b7f81a738cfa2776e8"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/design/Biocoin_Motherboard_v1.0.PrjPcb",
+      "bytes": 39841,
+      "sha256": "38fec67246967d8dfeff355bb9ab9667e1f15aa37bda9ec5c2edb4eb7c71dd92"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/design/Biocoin_Motherboard_v1.0.PrjPcbStructure",
+      "bytes": 268,
+      "sha256": "1206e5b46da56064248e84fd8e0d231f9fe3f9508fdc49fd403fc3e806d9451e"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/design/DIGITAL_DATA.SchDoc",
+      "bytes": 70144,
+      "sha256": "7119f9437daec7bd45a7dfc39de22ca7e76abd3c5ee8ad13c5a46ed7daf233c2"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/design/Job1.OutJob",
+      "bytes": 15156,
+      "sha256": "30874811726c8cd9ff5c2993cf3fdce3344104c18a61811d5f91a6561e885c5b"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/design/POWER.SchDoc",
+      "bytes": 171008,
+      "sha256": "813a92450b16372b5aaf1e1697edad608018aee2f3866de5a2d54b663dfbabf8"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard-RectHoles.TXT",
+      "bytes": 303,
+      "sha256": "f1e1e07c31acadec71d2690ed5de65b4cfbb3cfc9eca931f81ffff2e6e2a3da5"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard-macro.APR_LIB",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.DRR",
+      "bytes": 4009,
+      "sha256": "09156c9a5649bc0aa0a8da15c9891d5505ef04801148f3477c03916f3b5faa47"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.EXTREP",
+      "bytes": 1724,
+      "sha256": "1a30e5c8797f2f0feb08bdd2708be476e80c8d9c5544c1eaa634bc585d4d5290"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.G1",
+      "bytes": 20185,
+      "sha256": "8f23b8234731fba2aa8812252a99d329b20fc974db3c14715869e2995d9a823c"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.G2",
+      "bytes": 8653,
+      "sha256": "023b948d960e7395d6376b7648daa532500e20b36b77e9ee9d224f7759f5989f"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GBL",
+      "bytes": 18481,
+      "sha256": "25691d81aa9f64952fdb59a0f5be520cd8a580e41ee5735f77a17387e0a93229"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GBO",
+      "bytes": 398918,
+      "sha256": "a19e7b6b269d60080930bc1148e5d36c76a20045f3b3f92e79debddca9ccab6b"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GBP",
+      "bytes": 1678,
+      "sha256": "d0e1a0e27be2c44e23db7f5d96b0b40e9c4735e9be58a8e38459d821dece0cb9"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GBS",
+      "bytes": 4956,
+      "sha256": "8ab9f9e47963365f90982456be65bc6e0ae887470d4100944eefc5e7b34bf5e1"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GKO",
+      "bytes": 528,
+      "sha256": "4c73c5281ec9a0e00266e9deb1da9a481ffd00e6adf5fdc025a961e490ba868f"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GM1",
+      "bytes": 287,
+      "sha256": "5bbc23dd612719572b07bb7b2a485d35e272a6639471b99969472434ffa37b80"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GM13",
+      "bytes": 8079,
+      "sha256": "07cd28184ae72420c624a5a3af468eb76d83160b85bea57eea764ccc86a126e4"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GM15",
+      "bytes": 9040,
+      "sha256": "1e291abb4318da19c6cb06beb64da26cc5e00ab06fb2ddabd047dead11d0fbc1"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GM29",
+      "bytes": 3538,
+      "sha256": "8e8ea47cb31c9f6ff65544781f825cbb8f9a84851b485a1bd8536b4c6402131d"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GM7",
+      "bytes": 347,
+      "sha256": "97b33fc3635140f3a1b7e1487b6c376e0da6241e3b11cb0e47e9a9bbb81a9ec2"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GPB",
+      "bytes": 4939,
+      "sha256": "97147a319137d74fd3d14ce329ed2c59e93881c52c67620b08c978fb40fcace4"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GPT",
+      "bytes": 4786,
+      "sha256": "7886ef31a5e1b6994361a40e966962149a8d09cdaded4d5faf1bfade27fd6335"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GTL",
+      "bytes": 33856,
+      "sha256": "82cbdfd3ab9eae89a82ee7f4e01703ac381366db3a7d04fed46725244e50f46c"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GTO",
+      "bytes": 502322,
+      "sha256": "5d6ced94294cdb5433348764b2e3cc3ee5a1c7e4237b2867a4f61c287211fa13"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GTP",
+      "bytes": 1529,
+      "sha256": "e32806ca84961ee5661a61c98a6ddd246a4ab5f41e4686c6dd32e6b3fe526704"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.GTS",
+      "bytes": 4802,
+      "sha256": "4a731a29021cfc104a56b011b79f900d0bbb5b439a3b4fb2e63660df58773ae0"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.LDP",
+      "bytes": 319,
+      "sha256": "85e96628f33f17db8d2affafe46f6aae4a9e39c49f40d58e3456d5b1937e046b"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.REP",
+      "bytes": 7583,
+      "sha256": "70fc1db9e23007f17d5983b85e2239ae6341524eb95f9a9217120525c97c5507"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.RUL",
+      "bytes": 390,
+      "sha256": "299cb42286c0f27fe84bb01d72ec154efb25530b25e57cf5a9ab3fc18c2187af"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.TXT",
+      "bytes": 2377,
+      "sha256": "057db2179f4a1a7d784f03b26b4532042e158c2d82b0e28f8e1edd7b7a2c431b"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Docking Station/gerber/Biocoin_Motherboard.apr",
+      "bytes": 6075,
+      "sha256": "2d2410fc9d4f66cd30ac00bc66ea17d161e3d14165289e79b1dd5e01b358f3f4"
+    },
+    {
+      "path": "vendor/biocoin/PCB/README.md",
+      "bytes": 2331,
+      "sha256": "aaa627436f462537712aeabacd5b9a841896f481d46affba0385146d10d868d6"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Shared Libraries/Modules.PcbLib",
+      "bytes": 1341440,
+      "sha256": "52e82ad8c10b2e88d4d59f6dff9d327a45dad8c0acb536c094983e7c235f2ec2"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Shared Libraries/Modules.SchLib",
+      "bytes": 4096,
+      "sha256": "d8bda302ec298e569e8c9d1d3d39c6dca8887c301862526b2184784f3df69193"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Shared Libraries/PcbLib.PcbLib",
+      "bytes": 13950464,
+      "sha256": "568a689f22560d18288179c6ccaa9d622c2aec4edcfecdff63ded102209b8842"
+    },
+    {
+      "path": "vendor/biocoin/PCB/Shared Libraries/Schlib.SchLib",
+      "bytes": 607232,
+      "sha256": "35f84f49cf05aac1234c8a79233d6a66bcf78a59c70d16e7b018f543b00add3f"
+    },
+    {
+      "path": "vendor/biocoin/README.md",
+      "bytes": 4461,
+      "sha256": "e103e409a260024c8101e267b1cf8ae1de0de0b3744a4da978504b220485ab32"
+    },
+    {
+      "path": "vendor/biocoin/UPSTREAM_MANIFEST.json",
+      "bytes": 53174,
+      "sha256": "26e47569ee3a3932ae06660be218386a51b47d41416fd3b201079ffb25603d5a"
+    },
+    {
+      "path": "vendor/biocoin/firmware/.clang-format",
+      "bytes": 1009,
+      "sha256": "cf14e2dc86cf625c2d361cafeaf0f7352c35b77c8affee242e4cf431c3aea5d8"
+    },
+    {
+      "path": "vendor/biocoin/firmware/.gitattributes",
+      "bytes": 443,
+      "sha256": "ecd216c20697744542ce5a8ae1c7b1c22aafdcd182d8197e9b163e98030a4467"
+    },
+    {
+      "path": "vendor/biocoin/firmware/.githooks/pre-commit",
+      "bytes": 544,
+      "sha256": "cfdb58761b9b9600e39ffb19adae4085b690209033620a4bd534a0e5f1baf65c"
+    },
+    {
+      "path": "vendor/biocoin/firmware/.githooks/pre-push",
+      "bytes": 666,
+      "sha256": "8b4b439ab0c844bf3f8ffc960ed5ed03ea2dd1b8b16c11bb981e69afd016871b"
+    },
+    {
+      "path": "vendor/biocoin/firmware/.gitignore",
+      "bytes": 502,
+      "sha256": "02885c421f8c47cacdf1490a9a6ceee197bd0a4ca29394057883d2ca14d6ade0"
+    },
+    {
+      "path": "vendor/biocoin/firmware/Firmware.code-workspace",
+      "bytes": 991,
+      "sha256": "1488941509ccccbba137265ab3be4c9eb686dbb2d61a7bda357504107afb73ac"
+    },
+    {
+      "path": "vendor/biocoin/firmware/README.md",
+      "bytes": 11079,
+      "sha256": "6f029fa606662a7d8b36813bf07763ab6253389cac5b3d343d2bb6b6bbe5d4a5"
+    },
+    {
+      "path": "vendor/biocoin/firmware/REVISION_HISTORY.md",
+      "bytes": 7712,
+      "sha256": "84eefe6a61c53f19510b57e0a9ed8aa69d40051b2be567c7d5bb7f30d1951ea8"
+    },
+    {
+      "path": "vendor/biocoin/firmware/SDK Modifications/WInterrupts-port.c",
+      "bytes": 10627,
+      "sha256": "522be2bf172be7170567cd3754a34cf1160493912972d9ed86813a72508dd54a"
+    },
+    {
+      "path": "vendor/biocoin/firmware/SDK Modifications/WInterrupts-port.h",
+      "bytes": 1551,
+      "sha256": "eda8e14595bae9d77f86866b73d4bc9a977fe165ad1c68ef279001e789334290"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/BATTERY_CALIBRATION.md",
+      "bytes": 2003,
+      "sha256": "b3778380ff2fcbb586856f8eb34c62b385af1d16895a0a1c84e8de9f710d820c"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/BLE_PROTOCOL.md",
+      "bytes": 1428,
+      "sha256": "601be017f2de08facb3baac508319a5d5d5b4427138f38d9b784458757de7096"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/BUILD_FLASH.md",
+      "bytes": 1185,
+      "sha256": "29f7418f2b98f5c2e63723ad6ea1ef9a10aa98b646ca26d8ec56e7ae79809f51"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/CA_TECHNIQUE.md",
+      "bytes": 1326,
+      "sha256": "cc1da9c2a8d03c4f6b30498ea1a2be2ea8bd6ac4af085cb7cd26f6aa6a38428f"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/CONTRIBUTING.md",
+      "bytes": 1720,
+      "sha256": "d33e150aa9d4131591dea087521f02fdcf008ca14f99b2b2a7b48e90e75cac66"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/CV_TECHNIQUE.md",
+      "bytes": 989,
+      "sha256": "e9c562ac1572d4c84c7660f4cb93ca32de65bcc3803329aee514c937924a320b"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/DPV_TECHNIQUE.md",
+      "bytes": 1084,
+      "sha256": "c99df50581350fb502192afebc0ffd507ab6a712e751d694699dab035bcd9f2b"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/IMP_TECHNIQUE.md",
+      "bytes": 970,
+      "sha256": "3f53b416c10c57798720e121896c949040014ebc3175cb7d47ff2bbc3e9390ed"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/IONTOPHORESIS_TECHNIQUE.md",
+      "bytes": 809,
+      "sha256": "b8efeca8ef345ba46bd378a70962c215eb539928a7c12b3306e8cf1be4b9904e"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/OCP_TECHNIQUE.md",
+      "bytes": 939,
+      "sha256": "927dc3cc6fc0c5218d21b58d01708900c35c105fb17a6353768e1176a877d9f4"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/POWER.md",
+      "bytes": 621,
+      "sha256": "942158417779d7c7f5978509341a71fd7eed2b141c1dfa53c05839bedc6f7d23"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/README.md",
+      "bytes": 1716,
+      "sha256": "211e164a0c5da61ae7ba0ca11570122698962e538576b2abb3fb54b4856b8264"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/RELEASE_CHECKLIST.md",
+      "bytes": 1527,
+      "sha256": "18bb26a289a46c5c70e724dd843ca5029ff9b3fb7c80edeaff0318e3fab784f9"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/SWV_TECHNIQUE.md",
+      "bytes": 1013,
+      "sha256": "62347ca2b5b4a7bdf879dd907194af4acf72666e0142150ebb6251c6f239df30"
+    },
+    {
+      "path": "vendor/biocoin/firmware/docs/TEMP_TECHNIQUE.md",
+      "bytes": 942,
+      "sha256": "f12697dfae867dc8d44a8a5ac07577a830dcdf3c9291917940684d4555c0659f"
+    },
+    {
+      "path": "vendor/biocoin/firmware/platformio.ini",
+      "bytes": 1348,
+      "sha256": "060558f1d2eaf09b3a77410501c88e76295100b812da72d4c507bc80cb87d42c"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/analyze_battery_curve.py",
+      "bytes": 6970,
+      "sha256": "ede5c5fcd3020e43cfe0f87106d13b6f615d47e76355cee44986912fabab4ab7"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/build_firmware_artifacts.sh",
+      "bytes": 1267,
+      "sha256": "90b012bb0fc606e0e0357fd4144f59f1ded4032ee9579613ce94ed73c69a5113"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/check_project_warnings.sh",
+      "bytes": 599,
+      "sha256": "a014f623df01717520b903ac03383c084f445ce757427bf678ec1491837d9b6d"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/log_battery_ble.py",
+      "bytes": 14727,
+      "sha256": "920a6fced1fb270611940d33263fe68e09cdc7ac02b96089a7a8fb2acc65696e"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/log_battery_voltage.py",
+      "bytes": 162,
+      "sha256": "049f3a53cf4d67ee348634c46ace908f164fd66bf96e6274ab334593070f5057"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/pyproject.toml",
+      "bytes": 234,
+      "sha256": "c6aae626ec46cdab6ff623dc1e097df805dce84789d90dae0a674965adb28597"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/sanity_checks.sh",
+      "bytes": 1243,
+      "sha256": "506bf52e9b4d46477ae8527e159c72f6a16aebcbe9cbc0c509080af9b7a8afdb"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/smoke_sensor_modes.sh",
+      "bytes": 1332,
+      "sha256": "cc3984d56a5629a5fe2d55587da2ae4262944338e104ebb5f3e74aec7e85ce29"
+    },
+    {
+      "path": "vendor/biocoin/firmware/scripts/uv.lock",
+      "bytes": 254111,
+      "sha256": "755b809210d1ae39abca4e210dd5ad27ddf1e593dde79353a53a30bacf630625"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/HWConfig/build_checks.h",
+      "bytes": 943,
+      "sha256": "baf933ae052461b68f0f4d509abb64dda7d93c71c3675418acfbacf903f7367f"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/HWConfig/config.h",
+      "bytes": 4196,
+      "sha256": "a15473798d99a39c51cf6ef2ed78e548634a2d9da9ec9915047ea16909f61a64"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/HWConfig/constants.h",
+      "bytes": 741,
+      "sha256": "5c86fdb89b72674b685517cac4a7cb29130e3a44035f2224e2d848d181688ba0"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/HWConfig/pins.h",
+      "bytes": 879,
+      "sha256": "07e67fb0916e67d21745ab7ce94979c251a0a929bb7952095386304eead2cdbe"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/battery/battery.cpp",
+      "bytes": 3490,
+      "sha256": "602c7e9b4c18b291128d6270eca10998d2c8d89ba172d6a2cda55a7cccaebc1a"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/battery/battery.h",
+      "bytes": 1134,
+      "sha256": "e2c493db79ae910022597f12d7c12a07d1d2948878fbfc97974085cbebcd1fe1"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/battery/battery_task.cpp",
+      "bytes": 2266,
+      "sha256": "895c205410611b5c39fddaefab7b84b2212b7624c8ce786e87b3b6913cb8905a"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/battery/battery_task.h",
+      "bytes": 522,
+      "sha256": "a3014f20fa3df248fcb38456ecdb7cb01bf8df81f544f578882345328fefab08"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/bluetooth/bluetooth.cpp",
+      "bytes": 5913,
+      "sha256": "51a0e97b73ad626f7acabf9640c9d10faf0342ce1a950ad7d117fb387e799133"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/bluetooth/bluetooth.h",
+      "bytes": 1069,
+      "sha256": "1c668744917c3cdfd12010cef1e95b84beeec8abb0466664fbe81580f1291c49"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/bluetooth/gatt.cpp",
+      "bytes": 7274,
+      "sha256": "b3e0ecea6faebed31b2c299995e99c887c46cb32492f89b2a969edc94236e3ff"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/bluetooth/gatt.h",
+      "bytes": 2729,
+      "sha256": "8bc1cb8dc39f5b2fef657b36a4c51827ec32b967cb7e00b50471c58ca4f2cc8e"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/bluetooth/transmitdata_task.cpp",
+      "bytes": 4373,
+      "sha256": "5012fe9205cb2cf1fd9b0a73368af64f1404f0df4f81a66ec95c02e7b566fff6"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/bluetooth/transmitdata_task.h",
+      "bytes": 743,
+      "sha256": "9dac0903d0ce8ed811cef456a073b9b9961e48e50c0c82776d54574e85ecb956"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/drivers/ad5940.c",
+      "bytes": 157295,
+      "sha256": "943bb359101bfe9829f55580cd3d1f3a58f552a224a166e70dee22a4575e2a95"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/drivers/ad5940.h",
+      "bytes": 348660,
+      "sha256": "f6e2a6aa1e67e6e44759897b61bb59739d69c1ae6c429532ed55d54a31a97517"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/drivers/ad5940_hal.cpp",
+      "bytes": 5987,
+      "sha256": "20c7940e0e61e729bd4ed403210a9cfabb1a9ea73e2771cf82195a691d1ae0c2"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/drivers/ad5940_hal.h",
+      "bytes": 1029,
+      "sha256": "a8c542fb4c2d302ff009a5a5d58beb376df5c3a1f3b7854d7bc1165b0193d056"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/drivers/ad5940_helper.cpp",
+      "bytes": 7353,
+      "sha256": "0920799113c9d132ffb955dfb1369def41c3a265f2fc26315dd6dd180a43f8a0"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/drivers/ad5940_helper.h",
+      "bytes": 1191,
+      "sha256": "36768724faebe5a5899cbfeed0975700e90aab2a4310033051af8e24cd35e365"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/main.cpp",
+      "bytes": 1501,
+      "sha256": "7a9645e286821ee7a014910f9cb5933723c6f8a102aac1aff2de18dd33737377"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/power/led_task.cpp",
+      "bytes": 1926,
+      "sha256": "7a2b1aea0234026c914afd1216ca0d5b32094e54108f3d67e8c0bb9ba3e684d7"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/power/led_task.h",
+      "bytes": 380,
+      "sha256": "b61fbb2c2069acecc39a77d175ebab8b67eaca821d80298a9569fa2fba61f8c4"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/power/power.cpp",
+      "bytes": 7003,
+      "sha256": "33a48399df96ed910ec025e457e77efaba6e9413758def7df9261fb12c7034f2"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/power/power.h",
+      "bytes": 1486,
+      "sha256": "09920a7d0ffb3a37e731a2f1d6d367dda40e6d7b27acee40f11270824a0ee1ec"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/core/datamover_task.cpp",
+      "bytes": 2789,
+      "sha256": "7d69f01559b2fe3cfb42c37220ba146bd099b0bda0be44f79a90969eedec2220"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/core/datamover_task.h",
+      "bytes": 499,
+      "sha256": "8cead11385cf851e0e3eb233f6344147ca4dd29e39c683c4e9ee2f6c4cc8d46e"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/core/sensor.cpp",
+      "bytes": 389,
+      "sha256": "05670aa3c47c76c6681a379aaaf6a52315194f5c9a6e0d647a6da2473ac606de"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/core/sensor.h",
+      "bytes": 3857,
+      "sha256": "01392523ae854c0e5fc58681987b525aaae12c01b68709038a2434dc7f0c3d7e"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/core/sensor_manager.cpp",
+      "bytes": 5711,
+      "sha256": "570c70d352db927eb1ae1814e4eee528c402a575bb4f45cc80ce0bdec55eb09e"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/core/sensor_manager.h",
+      "bytes": 2346,
+      "sha256": "e574a20601c265996ea200583087e9fef6098f767afb28ff9a15b1d8a4dd2439"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ca/echem_ca.cpp",
+      "bytes": 6934,
+      "sha256": "1cbdd006669444f2cf6b7f06f78c225f6077c0e00d45e8e319e1ee655aea5d61"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ca/echem_ca.h",
+      "bytes": 7962,
+      "sha256": "e77b5e6b540937a4d092be7abe8df0dd5acefeef7774c1f84b264130883b8b9a"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ca/echem_ca_config.cpp",
+      "bytes": 1943,
+      "sha256": "baae7f128246cbad8af81da85df384b796cdadcfebf4cbe100d7b6e11fff4658"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ca/echem_ca_runtime.cpp",
+      "bytes": 493,
+      "sha256": "151a8b95afad0e35e4b360cbf6bad558ca39a7401d91187aa205b4c2a5910f4d"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ca/echem_ca_sequence.cpp",
+      "bytes": 2952,
+      "sha256": "85363d46d63caa269085d6ec692d6ef6004250d4c70db149357d3359f2ba05f9"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/cv/echem_cv.cpp",
+      "bytes": 9068,
+      "sha256": "8df0e07aaaf09f1f7dc84245479d91b8c6376fd3b03215dca937195589a0554e"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/cv/echem_cv.h",
+      "bytes": 8078,
+      "sha256": "4bf3d571a3900a23d8839420c8a625761568e9c3b98fb8b7da90372394427425"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/cv/echem_cv_config.cpp",
+      "bytes": 3264,
+      "sha256": "ba77c66849607edf14ca48228309a8ff3f105387a31758850381555c2867321d"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/cv/echem_cv_runtime.cpp",
+      "bytes": 2436,
+      "sha256": "ba93501d423d56f7ebc855775cd462c5ca69c1a200e1eeb3938cd7d3468ded67"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/cv/echem_cv_sequence.cpp",
+      "bytes": 6370,
+      "sha256": "22aa9a6d42a9c53fd09e37a1f39ecfeac85e616ce33c5d76cfa917fec5b03e11"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/dpv/echem_dpv.cpp",
+      "bytes": 9766,
+      "sha256": "0c0ccfc553b1ab4210cf21eebf9eca93dd79b1350b3f484e2c174de43a7e7bf7"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/dpv/echem_dpv.h",
+      "bytes": 8660,
+      "sha256": "451e8f3feb9226d6d6cddee50ec570479674735a3b3f7d204cd862d6b3e03767"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/dpv/echem_dpv_config.cpp",
+      "bytes": 3133,
+      "sha256": "f68d3bdf62e8fb12c1530b00e31c22cfab5719c5b4b9dd9873eb7c5d6b0bcb04"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/dpv/echem_dpv_runtime.cpp",
+      "bytes": 1976,
+      "sha256": "e1ee4f579e576a5504d50ed2787d75b2e3f93fced05ad6bf5b753c74b77459a9"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/dpv/echem_dpv_sequence.cpp",
+      "bytes": 7870,
+      "sha256": "54b0ac8497c387c1a3bd7aac07a9003cdb167f8fe9ba8dec40f9da4a0af084c0"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/imp/echem_imp.cpp",
+      "bytes": 7901,
+      "sha256": "59c6ba0956290077eb763a7ca357746255e1d45790c3a20c98f531519b330a81"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/imp/echem_imp.h",
+      "bytes": 8718,
+      "sha256": "e4126733880ada075fc02146af99300ed507dbf5325a72e705cb62764f5cda43"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/imp/echem_imp_config.cpp",
+      "bytes": 1775,
+      "sha256": "2d4ef1f6d32c163ff04de7e82ecb01db0bc1c8edd6f892925b8c0ab2b6e60b0b"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/imp/echem_imp_runtime.cpp",
+      "bytes": 2024,
+      "sha256": "19d019ad5f5ef773e915e8ff2798825c1cbbf07ee26240dcd9959002d55d4dc3"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/imp/echem_imp_sequence.cpp",
+      "bytes": 8989,
+      "sha256": "e06e8fa065f6c5bda5765b796d6af2d2d5090fd2534155fa4318ae6b4d8d2b2b"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/iontophoresis/iontophoresis.cpp",
+      "bytes": 4098,
+      "sha256": "97e5c1a0ec3af4c26c2a444354916840dba9eb008f1d97f5d91532173dadc450"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/iontophoresis/iontophoresis.h",
+      "bytes": 3553,
+      "sha256": "f7b9021c4b97a172f01017deca024ce11051bd2699916a7039696357ce0396f8"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/iontophoresis/iontophoresis_config.cpp",
+      "bytes": 1297,
+      "sha256": "40b10c53c716bf4a267a08cde67102458b368c3408f36c1c2af73cf41ca89401"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/iontophoresis/iontophoresis_runtime.cpp",
+      "bytes": 3797,
+      "sha256": "41b056cc9199aab415bd070027ec052086ca6d9c9c479c6d8c2d557dd7d129fd"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/lploop_helpers.h",
+      "bytes": 3429,
+      "sha256": "260b02bd0bd68ea654ff889d3e127d4a60cf1983dfb26aca2cb1fbf1b9e286fc"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ocp/echem_ocp.cpp",
+      "bytes": 5787,
+      "sha256": "df02115738683bb4ed3bc393a3cb2edad25126dd0dfe0d1a0b9786431bfa6423"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ocp/echem_ocp.h",
+      "bytes": 6231,
+      "sha256": "aa1176213a63430cc0e5dde6f809f4e80f1ec5da9d401bd9de18414bd1458d10"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ocp/echem_ocp_config.cpp",
+      "bytes": 1265,
+      "sha256": "2a35787fe564428febbce2a099da82d014a39e14e8863af4e8f0e79263d4bfc1"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ocp/echem_ocp_runtime.cpp",
+      "bytes": 477,
+      "sha256": "fe51d9a4b05d500cc3c41af72f4279f05a0f35cec0e175bdacb1229140ada0ee"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/ocp/echem_ocp_sequence.cpp",
+      "bytes": 2357,
+      "sha256": "7b1772711f52704fe8479bb95488988b96fb3b4e88cf9b9a1d756eaffae803d0"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/parameter_io_helpers.h",
+      "bytes": 908,
+      "sha256": "2053d105a4641300771d4dffb84538f56153dd77841f4b443e3c963b49dda00b"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/sensor_validation.h",
+      "bytes": 2658,
+      "sha256": "c857b00d87d6944a1642f1afb6d3175145f76cf1467e13ea1343da8780e21041"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/sequence_constants.h",
+      "bytes": 309,
+      "sha256": "72ce18deecc990974c9d56bcb02f365cabfe126bdceb4c8621b5dfeefe71274d"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/sequence_dac_helpers.h",
+      "bytes": 2568,
+      "sha256": "68e8e0b80a98cb97bc525e95ea2a4cd05cb547ea95a64aee138ef7cd756dc507"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/setup_measurement_helpers.h",
+      "bytes": 3966,
+      "sha256": "0b786f70cf5507388e3bfd075c35856ab6ce2d48059186fcf149da89e0c0319d"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/single_measurement_sequence_helpers.h",
+      "bytes": 1532,
+      "sha256": "e173e0d0cadee9ea2f52ca94645616db35c1196ec9f7bb16546c63c390c7ebea"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/swv/echem_swv.cpp",
+      "bytes": 9006,
+      "sha256": "70e2f6d5a8a2b219de3fbd1a480ad232483acb624b1a850e85b75eb9683f19e1"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/swv/echem_swv.h",
+      "bytes": 8321,
+      "sha256": "56801fbedeb60b41247db1ef0f60c2f354c679ab3c62e6d1ed8807eb0e50bb71"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/swv/echem_swv_config.cpp",
+      "bytes": 3221,
+      "sha256": "36a88cf408a815804e04573a878ffc695d0f3b1d41334b6f306e3d4440f447ac"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/swv/echem_swv_runtime.cpp",
+      "bytes": 2157,
+      "sha256": "27068590125c9f2a1d20b1e76b8863d2c7cd2a0b82206ce49eb4b8699d300cb5"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/swv/echem_swv_sequence.cpp",
+      "bytes": 6426,
+      "sha256": "f3999824a70a09ee831e6e9ab32c2e319b281ad548031d70c4715764f6f973e1"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/technique_init_helpers.h",
+      "bytes": 925,
+      "sha256": "d0898e276d7448e068db0bc534ca6a2c9bc3ed152b5339484d5747cbe7d177b3"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/technique_lifecycle_helpers.h",
+      "bytes": 2798,
+      "sha256": "4d58abfc3b665b77e10eb3948f15adfedc010f6a204ebc9a882dc7c1f352263a"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/technique_runtime_helpers.h",
+      "bytes": 3364,
+      "sha256": "789587df739288a480cf25ef89fc5ee1dc290b8237ca882ea521c95318b7b5ab"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/temp/echem_temp.cpp",
+      "bytes": 5642,
+      "sha256": "b81a47b6d76201a11ef2f119e1907608db309d1b8b3cb83211028959fe7b4a9f"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/temp/echem_temp.h",
+      "bytes": 6197,
+      "sha256": "6edf68ccefb9753345c06fa0c9b5ae4e905eeb5ea1d02e964d444d417370b8d5"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/temp/echem_temp_config.cpp",
+      "bytes": 1263,
+      "sha256": "757f72f66eead223ee6f53fa51cce1e0224743ee165d0b133531445ff2f5ec45"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/temp/echem_temp_runtime.cpp",
+      "bytes": 484,
+      "sha256": "08c3ddf458d0fcbcff5b14ed098cc4209fdbe6e6594acc50320b026b6d43759a"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/sensors/techniques/temp/echem_temp_sequence.cpp",
+      "bytes": 2326,
+      "sha256": "0939030bb49ae3c3a7bfd2b81cb6e1688acc9e4665b890a007ca7885b6b653fc"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/storage/storage.cpp",
+      "bytes": 1742,
+      "sha256": "eedd8bb17e15034b0730be55729f6f3b038a745be2a2a00cdf19b0cd365da331"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/storage/storage.h",
+      "bytes": 592,
+      "sha256": "5cf71dec510249745d909d228f6cb4bfea13bcbcbd3c910ac75a039404d20af9"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/util/debug_log.h",
+      "bytes": 832,
+      "sha256": "8ee3a075d9e1042a417e507c7396b3945eb4498ee941c49156ebdd96c8f98a30"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/util/payload_validation.h",
+      "bytes": 1568,
+      "sha256": "bc68ff83cbd002fc836d9008b38d1f6d31a21be89ea6742ab311998d99b04157"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/util/task_sync.h",
+      "bytes": 905,
+      "sha256": "71731a51eb9b7d918785b4c52ed2fc477805703f83cab6f2a8af271900b0717e"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/util/util.cpp",
+      "bytes": 4214,
+      "sha256": "01a1eb343f3ac73a55a8a9bfe679df2ab5d843bdd3099f49dc05d4936dada0f4"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/util/util.h",
+      "bytes": 426,
+      "sha256": "cb1034fd6aae0d640b8c3592a0522c59e9d7874fcb839e5aadf3b1ecf45db1a3"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/variants/biocoin/variant.cpp",
+      "bytes": 3721,
+      "sha256": "4f252767b91b0febafad48bf7373afc55aa7ea748a85efd62a54bee48f2ef327"
+    },
+    {
+      "path": "vendor/biocoin/firmware/src/variants/biocoin/variant.h",
+      "bytes": 4244,
+      "sha256": "7d32c45ea01b3d6495637bfd5e947b7ef0beb7eb56cfdd2c80e78721a58f9f4f"
+    },
+    {
+      "path": "vendor/biocoin/firmware/test/README.md",
+      "bytes": 1190,
+      "sha256": "437d2124566eefffa694ac6ca255f757308d56db44d6ef8333c87dec551c27f5"
+    },
+    {
+      "path": "vendor/biocoin/firmware/test/test_ca_parameter_validation/test_main.cpp",
+      "bytes": 3396,
+      "sha256": "51adbb1eaedaea6220976129b9da43a0f4418011e2fd81bb0dd2c08e57e85347"
+    },
+    {
+      "path": "vendor/biocoin/firmware/test/test_technique_start_preconditions/test_main.cpp",
+      "bytes": 994,
+      "sha256": "93c8dcaa3db435132f72ae490bdd581a4c64fc4c4e6fcf4b1e0fc5e7f090e309"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/assets/Biocoin_v1.3.step",
+      "bytes": 4697572,
+      "sha256": "4890936a052b1217c45d943953b825249a742f01f20519b775c5353abda8d7ed"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/assets/DPV_PCB_v2.step",
+      "bytes": 3722837,
+      "sha256": "0ea6ef38b9943bf29ee9213708cc9c83f23449bd6bd267e55ae297683a4d8c4f"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Biocoin_v1.3.SLDASM",
+      "bytes": 10087790,
+      "sha256": "82817efb2af73f0503615f33e0eb6cb85bbc2763b2c0ea189b3c4802a046255c"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Coin + Fixture.SLDASM",
+      "bytes": 10263770,
+      "sha256": "ffce553a527b0506bb6d548dffd4a9c146a187e7e79fc9891e28dcb6b8f68f54"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Holder - rev 6.JPG",
+      "bytes": 81188,
+      "sha256": "58fd4e602ddd74bf1228868052addc303501e7598f647ca10bc4ae5a5eca1bbb"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Holder - rev 6.SLDPRT",
+      "bytes": 352073,
+      "sha256": "a0f034347ce5d2d7d92ab46af83f72283475fc9668990c2af8deb880fa771399"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Holder Top - rev 3.JPG",
+      "bytes": 87301,
+      "sha256": "3a00fa0abb7448d91d50fe6a6b7d59c477dca4f1b9a093d98b64631ebe2db6b0"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Holder Top - rev 3.SLDPRT",
+      "bytes": 202447,
+      "sha256": "e48445cb3172f882fb293e3f653379d7d733beab0bd76de407a3bd44ca9af1ec"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/Assembled Biocoin.SLDASM",
+      "bytes": 8455372,
+      "sha256": "8b10bae171e4df18c135f7fa38b9ecaaa8f1b73410c8f8c1f9e054cc7b5a7f6f"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/Battery.SLDPRT",
+      "bytes": 164974,
+      "sha256": "2c997e6be50eb97e9f735d1a4e08ecf8d6be02377dc20b8e9203a58c0b8f9934"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/Bottom - rev 1 - Big Battery.STL",
+      "bytes": 194284,
+      "sha256": "d6632e8071f27dac652107029674943111fd3de238ebb9216813b770d1c4c986"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/Bottom - rev 1.SLDPRT",
+      "bytes": 208659,
+      "sha256": "81a78cd19551d86a5945e63c66be62017b7eadbd90158c31f013e950e2a95f12"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/DPV_PCB_v2.step",
+      "bytes": 3722837,
+      "sha256": "0ea6ef38b9943bf29ee9213708cc9c83f23449bd6bd267e55ae297683a4d8c4f"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/Holder - rev 2.SLDPRT",
+      "bytes": 112719,
+      "sha256": "a190408c9673805a4456c454fc18603df3e0b1b7e484a7b2c3859513d80ad5a7"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/Top - rev 1 - Big Battery.STL",
+      "bytes": 235484,
+      "sha256": "8406acf16b077d82d0cc06becf9ec329c937ebd9646ebe05771c108a6d305763"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/Top - rev 1.JPG",
+      "bytes": 70093,
+      "sha256": "5dcbde64685dcc0a3b71c8189b98269acf092d3a534e7d2b77f549c15f464458"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Large Battery/Top - rev 1.SLDPRT",
+      "bytes": 189525,
+      "sha256": "b2f3cbb8a88ae3d399ba04a73b1415ad25778e7e453481b3cee783a160c7f10c"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Assembled Biocoin.SLDASM",
+      "bytes": 8882788,
+      "sha256": "9ed785580108c451c5d07a8d6f8d1619ecfbe062f150e6f15e13efa99c542a8d"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Battery.SLDPRT",
+      "bytes": 164913,
+      "sha256": "33c2fd0a54212d1a36b350401fd263a84c419c31ccf0a628756ee21a36ed3936"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Bottom - rev 2.JPG",
+      "bytes": 92208,
+      "sha256": "11f95ca03ece0329528454168d78a4a56eb384145e8faea48c4724b79f24f182"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Bottom - rev 2.SLDPRT",
+      "bytes": 210101,
+      "sha256": "008bb9a85eef09ba546798039c7e177bc9c86f3e8a664ad4d7a21c271508ac51"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Bottom - rev 2.STL",
+      "bytes": 195284,
+      "sha256": "772d84e495077a621aad7b66063369e280e98b46307c226010f5ca91c04928bb"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/DPV_PCB_v2.step",
+      "bytes": 3722837,
+      "sha256": "0ea6ef38b9943bf29ee9213708cc9c83f23449bd6bd267e55ae297683a4d8c4f"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Holder - rev 2.SLDPRT",
+      "bytes": 350375,
+      "sha256": "a4abf9af9782f2240559503aecbb5ddee3b188f8f903e738bdb02797dab5f396"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Top - rev 1 - Small Battery.STL",
+      "bytes": 237684,
+      "sha256": "86115ed32eb12a2165e988555cdb8e671f7d8457e5b4ccb967325b677df91595"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Top - rev 1.JPG",
+      "bytes": 62200,
+      "sha256": "e40e39c32a8f91c4a664975b0be8dca2e1e8e5792ea836da3d4169906f2678e7"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/design/Small Battery/Top - rev 1.SLDPRT",
+      "bytes": 191840,
+      "sha256": "59e18cbe0b4307b13c4f6406753eb76aaaf3645617b3ed50d09b7a8cf198876a"
+    },
+    {
+      "path": "vendor/biocoin/fixtures/fabrication/Holder - rev 6.STL",
+      "bytes": 250884,
+      "sha256": "19d5f4922086f1592784d849fbc0620064efc5d98cb77c52696ec95b9e659475"
+    },
+    {
+      "path": "vendor/biocoin/software/.gitignore",
+      "bytes": 329,
+      "sha256": "1e3c3605e29536f4adb30e46b68a257a15e25822717e6b019241ebfcea50c6f6"
+    },
+    {
+      "path": "vendor/biocoin/software/README.md",
+      "bytes": 4095,
+      "sha256": "07828735f684be93491e29e85910c9ce609206cfdc7e04601798fbee2e7672a3"
+    },
+    {
+      "path": "vendor/biocoin/software/pyproject.toml",
+      "bytes": 1792,
+      "sha256": "27652769bc70882afbfb2311b8eb530a2c13d6578c80265ee277a8962c65aecd"
+    },
+    {
+      "path": "vendor/biocoin/software/pytest.ini",
+      "bytes": 118,
+      "sha256": "d7ee0bfd6e6ecc98906fa0244e38769da5bc70b0b4d20de67fe66c490ecca015"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/__init__.py",
+      "bytes": 151,
+      "sha256": "663bc7742d9b80bb32967c7536e36d17714d7d3daa2dc52adb2be19cfc5e540c"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/device.py",
+      "bytes": 9724,
+      "sha256": "fbd7a526d278fa590548feae7638792045ac15b553e7ebcedcb9c200a3c064d3"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/errors.py",
+      "bytes": 584,
+      "sha256": "9c01e0b69ccccfec06d75ace6c47fb595478f59cef8c55b2f6e2df5cd74935d0"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/__init__.py",
+      "bytes": 766,
+      "sha256": "2961f94a6edd5570c56255a22bf9977f93a11fbed1f8e6bc3595b33273353e52"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/base_technique.py",
+      "bytes": 12703,
+      "sha256": "771d254a9373c7fa9fbb01558a3a498b2ec4e0bf0e1b15b2a33a607101b4531f"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/ca.py",
+      "bytes": 5129,
+      "sha256": "673185badd0a650ce65c3a15087b9583c014d307cafec740ea84dc34b3db6f62"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/cv.py",
+      "bytes": 9673,
+      "sha256": "74ce2cd3576c4f32108d7a7206cd7c3208dbb0c2d7ecb5d59d6baae8e12de0dd"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/dpv.py",
+      "bytes": 7779,
+      "sha256": "43403683adcbee814f316236a93b25f86d03a6e784e66060d30ea7713d76b99c"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/impedance.py",
+      "bytes": 5645,
+      "sha256": "9565f9679bb86d41776ee72244274d641ccc53491a51fc06179c6b5ecae99ac8"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/iontophoresis.py",
+      "bytes": 4915,
+      "sha256": "8d11d0cb619a26cd78079f207b7aceee30072b08853765e7a40978c39728d398"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/ocp.py",
+      "bytes": 4603,
+      "sha256": "6d09a65576afbda390ab7732918c051f77531de7958f76637f394db8c3e4a10a"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/pulse_voltammetry.py",
+      "bytes": 1962,
+      "sha256": "e719f7a92f5f4aad9a08633c402025b9a78de904534e9ba6bdbd7ea3e0aa9533"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/swv.py",
+      "bytes": 7371,
+      "sha256": "310e4c2665582b9f7b930aa34a71f17d3ce2392cbdcf481e2fb458db25917340"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/temp.py",
+      "bytes": 4592,
+      "sha256": "78f626cebf26741023fb20230af1e8b0c3f780eb0ee9352751aa7939d1c46655"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/techniques/validation.py",
+      "bytes": 2206,
+      "sha256": "be9d03d5ea85b10f2e444940c41ab4b72b27ab8cb8f4d0c86dca8ed36a50ed00"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin/utils/ble_util.py",
+      "bytes": 5937,
+      "sha256": "ab23a4db81d6edae374d317f15219c287159d16802ac76b0f268a26352fdd44d"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/README.md",
+      "bytes": 620,
+      "sha256": "f1f3312423b9a53ff911b29a993e57fe2ab92b504978e048e4ca0c6f58291042"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/__init__.py",
+      "bytes": 39,
+      "sha256": "4c3312b1e4bf45a8290fb297545e9fecf2b2f0ac97d44e41f0bb2dcd8e1517fe"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/app.py",
+      "bytes": 8634,
+      "sha256": "bae58d2a4b06519a36abaab641674a623ca890731cfa6f70803f36ac1535f3ee"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/__init__.py",
+      "bytes": 40,
+      "sha256": "7517c8675a25675e2d62d72a52b449532dcecb96abcd0bd34178067281daf713"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/ca.py",
+      "bytes": 7423,
+      "sha256": "0c6567298eec6dc50adc17cadc1785bd8c326fd2b9a64dd383b7fccfdb8df07b"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/cv.py",
+      "bytes": 8542,
+      "sha256": "a55ae9bc9311f3528eabceb4bb50f7213a994c95eb4296d34cbd1c865355a369"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/dpv.py",
+      "bytes": 9428,
+      "sha256": "8ef939817f59ed88cbe87904f56b7399c51286b911c3bf92d36d2acb6eb01bbe"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/imp.py",
+      "bytes": 9169,
+      "sha256": "8c65334d38373fb052553c746bed024d41d39dd427749271bae4292f7d06da4d"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/ip.py",
+      "bytes": 7464,
+      "sha256": "7839da09e7b2891c736b62e35356d3f319e3005344d69ab2db227f073ac4ea16"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/ocp.py",
+      "bytes": 7302,
+      "sha256": "7551c3b55116c18210cfaacd7823e6df9427f790fa8fc08d14af04357030219e"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/swv.py",
+      "bytes": 9251,
+      "sha256": "bc9074c98ba4973f2d7afc536067ce62ab1d433d2be6fcf0f49e7db72aeaeb3b"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/pages/temp.py",
+      "bytes": 7890,
+      "sha256": "4dba1baccbc30f243bd9f97b6afccfa852d8d998f6d827a2de5b78b4d6840ca5"
+    },
+    {
+      "path": "vendor/biocoin/software/src/biocoin_gui/runtime.py",
+      "bytes": 24207,
+      "sha256": "058ba7076810611f8df78725a0ac9330d5017ec99bc2a955bc370f94166edc01"
+    },
+    {
+      "path": "vendor/biocoin/software/src/run_CA.py",
+      "bytes": 5321,
+      "sha256": "6044af50a02ef75decf8e0d989b4e033b770bba59280bea2cccc68ee7021f025"
+    },
+    {
+      "path": "vendor/biocoin/software/src/run_CV.py",
+      "bytes": 5518,
+      "sha256": "1e6fc692714a7d00ef484238cf400c94e5f06e66b5c4a7e58064989791b66b12"
+    },
+    {
+      "path": "vendor/biocoin/software/src/run_DPV.py",
+      "bytes": 5826,
+      "sha256": "6a007a5c3597a54d93afd8e162eb110a92790951c6fd07d3b83f6a13dc71b293"
+    },
+    {
+      "path": "vendor/biocoin/software/src/run_IMP.py",
+      "bytes": 5773,
+      "sha256": "432707ca433a38d3d8d6461b7ace016493495c207643a6956ee1387aa69bd5a1"
+    },
+    {
+      "path": "vendor/biocoin/software/src/run_IONTO.py",
+      "bytes": 4387,
+      "sha256": "06d2ef434d22219692ca73dcd2e1d281640d674dc7282e243cb3f13025b292f5"
+    },
+    {
+      "path": "vendor/biocoin/software/src/run_OCP.py",
+      "bytes": 4896,
+      "sha256": "bf71f03005bb4448073923e34ebde48a20e193043b96edc055c37606a5124dc6"
+    },
+    {
+      "path": "vendor/biocoin/software/src/run_SWV.py",
+      "bytes": 5731,
+      "sha256": "47189916e3275b76ba14880d249d9ef57bf282b4bd710a60615ccc13075dfeb3"
+    },
+    {
+      "path": "vendor/biocoin/software/src/run_TEMP.py",
+      "bytes": 4896,
+      "sha256": "d904523a3906794d23fc81c2c382b563441628d61b2afca9e2ed4e8c51093747"
+    },
+    {
+      "path": "vendor/biocoin/software/src/utils/logging_util.py",
+      "bytes": 3482,
+      "sha256": "f53fa6ec82353bc094e78d5847e93ef37778a6e27b82c9c98935fa77980d3ebb"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/__init__.py",
+      "bytes": 23,
+      "sha256": "5d6f1e0d97050cb650cc0c72272c1e8559e6c95089d92a861352c8a3e24c6ccb"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/integration/CA_2E_validation.py",
+      "bytes": 7605,
+      "sha256": "34abbb2619526327d1403df237ce1800253cf444140f7d7c182ab9f8b81a7f65"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/integration/CV_2E_validation.py",
+      "bytes": 9196,
+      "sha256": "db507755e382d064dd2a421402c0c8ce850f22a1daebd450ef081abe07304887"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/integration/DPV_2E_validation.py",
+      "bytes": 8579,
+      "sha256": "2250c6c334ab5ac33a40567583c9c3acb9fc826207a7cd50968808d35ff441f9"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/integration/SWV_2E_validation.py",
+      "bytes": 8401,
+      "sha256": "24f7aaf1f6a17176556782368e3be6a8d5f1a1ece34640c3fd0b9cd6b358a890"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/integration/__init__.py",
+      "bytes": 35,
+      "sha256": "f4c8d67b914d9b2f2137d2614131084980908bd53db14564fd13ed2cced7f6e3"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/integration/_validation_common.py",
+      "bytes": 818,
+      "sha256": "77d6387c5713aab7affab05763b23b9b0b1038d926cef318033726037bf56865"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/integration/test_hardware_entrypoints.py",
+      "bytes": 1237,
+      "sha256": "c8752e19cfd361fe2193fa99d1e670e897ae1f434dd4134468d2452f9a68ebbb"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/unit/conftest.py",
+      "bytes": 677,
+      "sha256": "7b02f9ac456183b350176b35880cfd674659009088f66750497aa08937b5646e"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/unit/test_base_technique.py",
+      "bytes": 5761,
+      "sha256": "d64bf0b57547b285dcc7bafc5d44e6dd80f9419783e7dadb4c493306e1402f02"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/unit/test_config_payloads.py",
+      "bytes": 6125,
+      "sha256": "3130a25dc00f702ea884c409e0dac134644d9957e571d855a704802df7375828"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/unit/test_device_and_ble_util.py",
+      "bytes": 4475,
+      "sha256": "c56dba34dae8996a351fd095287411a25bd8545aed74f7a72209b4307fee3e16"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/unit/test_notification_parsing.py",
+      "bytes": 3080,
+      "sha256": "5c1ad28d75fca422cb91c01f3b6eef457afbd41376a2f64748d6f323de9b598c"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/unit/test_run_lifecycle.py",
+      "bytes": 4536,
+      "sha256": "f05b4ae625a6290c5acfe64f9e40a2e92e1e1a201903f1ae4885c6afdb056d43"
+    },
+    {
+      "path": "vendor/biocoin/software/tests/unit/test_voltage_vectors.py",
+      "bytes": 2372,
+      "sha256": "1ce4820a4384a2d30895f0ef66611382e20a56ca86bf59c575faae6313bde3ba"
+    },
+    {
+      "path": "vendor/biocoin/software/uv.lock",
+      "bytes": 193713,
+      "sha256": "c5eae63bcd0df7f7328e6328e98a7e13da91a58885faa6e9500cec8d18f3329c"
+    }
+  ]
+}

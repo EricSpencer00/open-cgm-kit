@@ -1,0 +1,15 @@
+use "synthetic_fixtures.rz";
+
+let cal = synthetic_calibration();
+let sample = synthetic_sample(1600, 37000, 100, 2);
+let result = evaluate(sample, cal, 300000);
+println("SYNTHETIC FIXTURE: invented current and calibration");
+println("status: " + result.status);
+if result.has_glucose {
+    println("fixture mg/dL: " + result.glucose_mgdl);
+    println("fixture mmol/L tenths: " + mmol_l_tenths(result.glucose_mgdl));
+}
+cal.enabled = false;
+let uncalibrated = evaluate(sample, cal, 300000);
+println("without calibration: " + uncalibrated.status);
+println("glucose present: " + uncalibrated.has_glucose);

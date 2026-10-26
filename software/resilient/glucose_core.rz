@@ -1,0 +1,138 @@
+// The calibration object is a lab-issued input, never an inferred sensor claim.
+struct Calibration {
+    bool enabled,
+    int id,
+    int low_current_pa,
+    int high_current_pa,
+    int low_glucose_mgdl,
+    int high_glucose_mgdl,
+    int min_temp_mc,
+    int max_temp_mc,
+}
+
+struct SensorSample {
+    int sequence,
+    int raw_current_pa,
+    int temp_mc,
+    int age_ms,
+    int sensor_state,
+}
+
+struct Evaluation {
+    string status,
+    bool has_glucose,
+    int glucose_mgdl,
+    int calibration_id,
+}
+
+fn unavailable(string status) -> Evaluation {
+    return new Evaluation {
+        status: status,
+        has_glucose: false,
+        glucose_mgdl: -1,
+        calibration_id: 0,
+    };
+}
+
+fn calibration_valid(Calibration cal) -> bool {
+    if cal.id < 1 || cal.id > 4294967295 { return false; }
+    if cal.low_glucose_mgdl < 1 { return false; }
+    if cal.high_glucose_mgdl > 1000 { return false; }
+    if cal.low_glucose_mgdl >= cal.high_glucose_mgdl { return false; }
+    if cal.low_current_pa < -1000000000 || cal.low_current_pa > 1000000000 { return false; }
+    if cal.high_current_pa < -1000000000 || cal.high_current_pa > 1000000000 { return false; }
+    if cal.low_current_pa == cal.high_current_pa { return false; }
+    if cal.min_temp_mc < -40000 || cal.max_temp_mc > 85000 { return false; }
+    if cal.min_temp_mc > cal.max_temp_mc { return false; }
+    return true;
+}
+
+fn current_in_calibration(int current_pa, Calibration cal) -> bool {
+    let lower = cal.low_current_pa;
+    let upper = cal.high_current_pa;
+    if lower > upper {
+        lower = cal.high_current_pa;
+        upper = cal.low_current_pa;
+    }
+    return current_pa >= lower && current_pa <= upper;
+}
+
+fn interpolate_mgdl(int current_pa, Calibration cal) -> int
+    requires calibration_valid(cal)
+    requires current_in_calibration(current_pa, cal)
+    ensures result >= 1
+    ensures result <= 1000
+{
+    let current_span = cal.high_current_pa - cal.low_current_pa;
+    let current_delta = current_pa - cal.low_current_pa;
+    if current_span < 0 {
+        current_span = 0 - current_span;
+        current_delta = 0 - current_delta;
+    }
+    let glucose_span = cal.high_glucose_mgdl - cal.low_glucose_mgdl;
+    // Validated spans bound this product below 2e12, within signed int64.
+    let numerator = current_delta * glucose_span;
+    let half_span = current_span / 2;
+    let rounded_numerator = numerator + half_span;
+    let glucose_delta = rounded_numerator / current_span;
+    return cal.low_glucose_mgdl + glucose_delta;
+}
+
+fn evaluate(SensorSample sample, Calibration cal, int max_age_ms) -> Evaluation {
+    if max_age_ms < 1 || max_age_ms > 3600000 {
+        return unavailable("invalid_configuration");
+    }
+    if sample.sequence < 0 || sample.sequence > 4294967295 {
+        return unavailable("invalid_sample");
+    }
+    if sample.raw_current_pa < -1000000000 || sample.raw_current_pa > 1000000000 {
+        return unavailable("invalid_sample");
+    }
+    if sample.temp_mc < -40000 || sample.temp_mc > 85000 || sample.age_ms < 0 {
+        return unavailable("invalid_sample");
+    }
+    if sample.sensor_state == 3 { return unavailable("sensor_fault"); }
+    if sample.sensor_state == 1 { return unavailable("warmup"); }
+    if sample.sensor_state == 0 { return unavailable("sensor_offline"); }
+    if sample.sensor_state != 2 { return unavailable("invalid_sample"); }
+    if cal.enabled == false || cal.id == 0 { return unavailable("uncalibrated"); }
+    if calibration_valid(cal) == false { return unavailable("invalid_calibration"); }
+    if sample.age_ms > max_age_ms { return unavailable("stale"); }
+    if sample.temp_mc < cal.min_temp_mc || sample.temp_mc > cal.max_temp_mc {
+        return unavailable("outside_temperature_calibration");
+    }
+    if current_in_calibration(sample.raw_current_pa, cal) == false {
+        return unavailable("outside_current_calibration");
+    }
+    let glucose = interpolate_mgdl(sample.raw_current_pa, cal);
+    return new Evaluation {
+        status: "ready",
+        has_glucose: true,
+        glucose_mgdl: glucose,
+        calibration_id: cal.id,
+    };
+}
+
+// Add receiver elapsed time before display; do not trust a frozen packet age.
+fn effective_age_ms(int packet_age_ms, int received_ms, int now_ms, int max_age_ms) -> int {
+    if max_age_ms < 1 || max_age_ms > 3600000 { return -1; }
+    if packet_age_ms < 0 || received_ms < 0 || now_ms < received_ms { return -1; }
+    let stale_age = max_age_ms + 1;
+    if packet_age_ms > max_age_ms { return stale_age; }
+    let elapsed = now_ms - received_ms;
+    let remaining = max_age_ms - packet_age_ms;
+    if elapsed > remaining { return stale_age; }
+    return packet_age_ms + elapsed;
+}
+
+fn mmol_l_tenths(int glucose_mgdl) -> int
+    requires glucose_mgdl >= 0
+    requires glucose_mgdl <= 1000
+    ensures result >= 0
+    ensures result <= 555
+{
+    // 18.01559 mg/dL per mmol/L; round once for a one-decimal display.
+    let scaled = glucose_mgdl * 1000000;
+    let rounded = scaled + 900779;
+    return rounded / 1801559;
+}

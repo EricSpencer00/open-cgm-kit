@@ -1,0 +1,39 @@
+{
+  "rz": "0.1.0",
+  "hardware_connected": false,
+  "results": [
+    {
+      "command": [
+        "sh",
+        "software/resilient/run_checks.sh"
+      ],
+      "exit_code": 0,
+      "stdout": "rz 0.1.0: pre-1.0 \u2014 breaking changes possible (see STABILITY.md)\n/Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz: ok\nSynthetic Resilient core checks passed\nProgram executed successfully\n/Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz: ok\nSYNTHETIC FIXTURE: invented current and calibration\nstatus: ready\nfixture mg/dL: 220\nfixture mmol/L tenths: 122\nwithout calibration: uncalibrated\nglucose present: false\nProgram executed successfully\n",
+      "stderr": "warning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:61:32 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:62:37 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:63:23 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:64:23 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:61:32 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:62:37 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:129:30 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:130:30 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:131:23 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/core_tests.rz:132:23 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:61:32 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:62:37 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:63:23 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:64:23 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:61:32 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:62:37 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:129:30 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:130:30 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:131:23 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:132:23 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:129:30 \u2014 proof is incomplete\nwarning[partial-proof]: Z3 returned Unknown for assertion at /Users/eric/GitHub/open-cgm-kit/software/resilient/demo.rz:130:30 \u2014 proof is incomplete\n"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "software/bridge",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_cleanup_failure_preserves_original_start_error (test_biocoin_bridge.AcquisitionLifecycleTests.test_cleanup_failure_preserves_original_start_error) ... ok\ntest_corrupt_stop_tail_fails_capture (test_biocoin_bridge.AcquisitionLifecycleTests.test_corrupt_stop_tail_fails_capture) ... ok\ntest_existing_run_is_untouched (test_biocoin_bridge.AcquisitionLifecycleTests.test_existing_run_is_untouched) ... ok\ntest_fragmented_stop_tail_is_drained_without_complete_claim (test_biocoin_bridge.AcquisitionLifecycleTests.test_fragmented_stop_tail_is_drained_without_complete_claim) ... ok\ntest_rejected_configuration_does_not_send_stop (test_biocoin_bridge.AcquisitionLifecycleTests.test_rejected_configuration_does_not_send_stop) ... ok\ntest_stop_failure_still_unsubscribes (test_biocoin_bridge.AcquisitionLifecycleTests.test_stop_failure_still_unsubscribes) ... ok\ntest_ca_wire_layout (test_biocoin_bridge.ParserTests.test_ca_wire_layout) ... ok\ntest_codegen_rejects_nonintegers_and_extra_fields (test_biocoin_bridge.ParserTests.test_codegen_rejects_nonintegers_and_extra_fields) ... ok\ntest_current_bounds (test_biocoin_bridge.ParserTests.test_current_bounds) ... ok\ntest_invalid_ca_parameters (test_biocoin_bridge.ParserTests.test_invalid_ca_parameters) ... ok\ntest_nonfinite_samples (test_biocoin_bridge.ParserTests.test_nonfinite_samples) ... ok\ntest_split_and_coalesced_notifications (test_biocoin_bridge.ParserTests.test_split_and_coalesced_notifications) ... ok\ntest_status_exact_length (test_biocoin_bridge.ParserTests.test_status_exact_length) ... ok\ntest_truncated_stream (test_biocoin_bridge.ParserTests.test_truncated_stream) ... ok\ntest_live_missing_observations_never_emit_glucose (test_biocoin_bridge.ResilientIntegrationTests.test_live_missing_observations_never_emit_glucose) ... ok\ntest_synthetic_current_through_actual_resilient_core (test_biocoin_bridge.ResilientIntegrationTests.test_synthetic_current_through_actual_resilient_core) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.324s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python3",
+        "software/bridge/biocoin_bridge.py",
+        "--demo"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"source\":\"synthetic_fixture\",\"measured_on_hardware\":false,\"raw_current_pA\":1600,\"temp_mC\":37000,\"status\":\"ready\",\"glucose_mgdl\":220,\"calibration_id\":1}\n",
+      "stderr": ""
+    }
+  ]
+}

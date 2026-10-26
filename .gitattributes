@@ -1,0 +1,6 @@
+# Immutable upstream snapshot is reviewed via provenance hashes and source links.
+vendor/** -diff
+*.stl binary
+*.STL binary
+*.png binary
+*.xlsx binary
