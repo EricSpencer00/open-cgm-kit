@@ -5,3 +5,5 @@ __pycache__/
 .DS_Store
 deliverables/*.zip
 tmp/
+build/
+.pio/

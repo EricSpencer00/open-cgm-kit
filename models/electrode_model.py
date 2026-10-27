@@ -407,15 +407,71 @@ def monte_carlo(n: int, seed: int = 0) -> dict:
     return {"n": len(metrics), "ranges": MC_RANGES, "summary": summary, "top_drivers_spearman": drivers}
 
 
-def synthetic_trace(result: dict, hours=24.0, dt_s=60.0, rtia="160K", seed=1) -> np.ndarray:
+@dataclass(frozen=True)
+class Failures:
+    """Failure modes layered on the synthetic trace. All off by default.
+
+    Enzyme loss, membrane fouling and O2 dips are run through the 1D model (steady-state
+    curves over a grid of enzyme fraction, membrane permeability factor and tissue O2),
+    so their effect on sensitivity is nonlinear: enzyme loss does nothing while the membrane
+    limits flux. Reference drift is a stand-in: a logistic current plateau around +0.35 V
+    (illustrative, not from the 1D model) plus a small oxidative background.
+    """
+    enzyme_half_life_h: float | None = None  # exponential loss of active GOx
+    fouling_fraction: float = 0.0  # final fractional loss of all outer-membrane permeabilities
+    fouling_tau_h: float = 30.0
+    ref_drift_mV_per_h: float = 0.0  # working potential vs reference changes by this per hour (negative = falls)
+    o2_dips: tuple[tuple[float, float, float], ...] = ()  # (start_h, duration_h, tissue O2 mM), 8 min ramps
+    o2_ramp_h: float = 8 / 60
+
+
+def _failure_interpolator(sensor: Sensor, f: Failures, hours: float):
+    from scipy.interpolate import RegularGridInterpolator
+
+    conc = np.array([0, 1, 2, 3, 4, 6, 8, 10, 12.5, 15, 20, 25, 30], dtype=float)
+    pair = lambda lo, hi: np.array([lo, hi if hi > lo else lo * 1.001])
+    e_ax = (np.array([1, .5, .25, .12, .06, .03, .015, .008])[::-1]
+            if f.enzyme_half_life_h else pair(1.0, 1.0))
+    p_ax = np.array([0.4, 0.6, 0.8, 1.0]) if f.fouling_fraction else pair(1.0, 1.0)
+    o_ax = np.array(sorted({TISSUE.oxygen_mM, *[d[2] for d in f.o2_dips]})) if f.o2_dips else pair(TISSUE.oxygen_mM, TISSUE.oxygen_mM)
+    if f.enzyme_half_life_h:
+        e_ax = e_ax[e_ax >= 0.5 ** (hours / f.enzyme_half_life_h) * 0.9]
+        e_ax = np.unique(np.append(e_ax, [e_ax.min() * 0.5, 1.0]))
+    if f.fouling_fraction:
+        p_ax = np.unique(np.append(np.linspace(1 - f.fouling_fraction, 1.0, 4), 1.0))
+    vals = np.empty((len(e_ax), len(p_ax), len(o_ax), len(conc)))
+    mem = sensor.layers[-1]
+    for i, e in enumerate(e_ax):
+        for j, p in enumerate(p_ax):
+            part = {s_: mem.k(s_) * p for s_ in SPECIES}
+            fouled = replace(sensor, enzyme_u_per_cm2=sensor.enzyme_u_per_cm2 * e,
+                             layers=sensor.layers[:-1] + (replace(mem, partition=part),))
+            for k, o2 in enumerate(o_ax):
+                vals[i, j, k] = calibration(fouled, replace(TISSUE, oxygen_mM=float(o2)), conc)
+    return RegularGridInterpolator((np.log10(e_ax), np.log10(p_ax), o_ax, conc), vals, bounds_error=False, fill_value=None)
+
+
+def tissue_o2_profile(t_h: np.ndarray, f: Failures) -> np.ndarray:
+    o2 = np.full_like(t_h, TISSUE.oxygen_mM)
+    for start, dur, level in f.o2_dips:
+        r = f.o2_ramp_h
+        down = np.clip((t_h - start) / r, 0, 1)
+        up = np.clip((t_h - (start + dur)) / r, 0, 1)
+        o2 = np.minimum(o2, TISSUE.oxygen_mM + (level - TISSUE.oxygen_mM) * (down - up))
+    return o2
+
+
+def synthetic_trace(result: dict, hours=24.0, dt_s=60.0, rtia="160K", seed=1, failures: Failures | None = None) -> np.ndarray:
     """Plausible raw-current trace for software fixtures: meals, ISF lag, sensor lag,
-    sensitivity drift, noise and ADC quantization. Not a physiological model."""
+    sensitivity drift, noise and ADC quantization. Not a physiological model.
+    `failures` adds enzyme loss, fouling, reference drift and O2 dips (see Failures)."""
     rng = np.random.default_rng(seed)
-    t = np.arange(0, hours * 3600, dt_s)
+    t = np.arange(0, hours * 3600, dt_s, dtype=float)
     blood = np.full_like(t, 5.5)
-    for meal_h, peak in ((7.5, 4.0), (12.5, 5.0), (19.0, 6.0)):
-        tm = (t / 3600 - meal_h)
-        blood += np.where(tm > 0, peak * (tm / 0.75) * np.exp(1 - tm / 0.75), 0)
+    for day in range(int(math.ceil(hours / 24))):
+        for meal_h, peak in ((7.5, 4.0), (12.5, 5.0), (19.0, 6.0)):
+            tm = (t / 3600 - meal_h - 24 * day)
+            blood += np.where(tm > 0, peak * (tm / 0.75) * np.exp(1 - tm / 0.75), 0)
     def lag(x, tau):
         y = np.empty_like(x); y[0] = x[0]; a = dt_s / (tau + dt_s)
         for k in range(1, len(x)):
@@ -424,12 +480,42 @@ def synthetic_trace(result: dict, hours=24.0, dt_s=60.0, rtia="160K", seed=1) ->
     isf = lag(blood, 8 * 60)
     tau = max(result["beaker"]["t90_5_to_10mM_s"], dt_s) / math.log(10)
     curves = result["_curves"]
-    ideal = np.interp(lag(isf, tau), curves["conc"], curves["tissue"])
+    sensed = lag(isf, tau)
     drift = 1 - 0.05 * t / 86400
-    noisy = ideal * drift + rng.normal(0, 0.05, t.size)
+    if failures is None:
+        ideal = np.interp(sensed, curves["conc"], curves["tissue"])
+        noisy = ideal * drift + rng.normal(0, 0.05, t.size)
+    else:
+        f, th = failures, t / 3600
+        interp = _failure_interpolator(PRESETS[result["name"]], f, hours)
+        e = 0.5 ** (th / f.enzyme_half_life_h) if f.enzyme_half_life_h else np.ones_like(th)
+        p = 1 - f.fouling_fraction * (1 - np.exp(-th / f.fouling_tau_h))
+        o2 = tissue_o2_profile(th, f)
+        pts = np.column_stack([np.log10(e), np.log10(p), o2, np.clip(sensed, 0, 30)])
+        ideal = interp(pts)
+        e_mV = 600.0 + f.ref_drift_mV_per_h * th
+        plateau = 1 / (1 + np.exp((350.0 - e_mV) / 35.0)) / (1 / (1 + np.exp((350.0 - 600.0) / 35.0)))
+        background = 0.05 * np.clip((e_mV - 600.0) / 100.0, 0, None)  # nA
+        noisy = ideal * drift * plateau + background + rng.normal(0, 0.05, t.size)
     lsb = ADC_VREF / ADC_PGA / 32768 / RTIA_OPTIONS_OHM[rtia] * 1e9
     raw = np.round(noisy / lsb) * lsb
     return np.column_stack([t, blood, isf, raw])
+
+
+STRESS_HOURS, STRESS_DT_S = 72.0, 300.0
+STRESS_VARIANTS = {
+    "nominal": None,
+    "enzyme_loss": Failures(enzyme_half_life_h=8.0),
+    "fouling": Failures(fouling_fraction=0.6),
+    "reference_drift": Failures(ref_drift_mV_per_h=-6.0),
+    "o2_dips": Failures(o2_dips=((30.0, 0.7, 0.003), (61.0, 0.5, 0.004))),
+}
+
+
+def stress_traces(result: dict) -> dict[str, np.ndarray]:
+    """72 h, 5 min traces for each failure mode on the tissue-grade membrane, 512 kohm gain."""
+    return {name: synthetic_trace(result, STRESS_HOURS, STRESS_DT_S, "512K", seed=7, failures=f)
+            for name, f in STRESS_VARIANTS.items()}
 
 
 def plot(results: list[dict], out: Path):
@@ -461,6 +547,26 @@ def plot(results: list[dict], out: Path):
 
 
 def main():
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "fit":
+        import fit as fit_mod
+        fp = argparse.ArgumentParser(prog="electrode_model.py fit", description=fit_mod.__doc__.splitlines()[0])
+        fp.add_argument("csv", type=Path)
+        fp.add_argument("--preset", choices=list(PRESETS), default="gox_pu", help="fixed layer stack and starting values")
+        fp.add_argument("--temp-c", type=float, default=25.0)
+        fp.add_argument("--boundary-um", type=float, default=50.0)
+        fp.add_argument("--fit-enzyme", action="store_true", help="also fit GOx loading (U/cm2)")
+        fp.add_argument("--out", type=Path, help="write full result JSON")
+        fit_mod.run(fp.parse_args(sys.argv[2:]))
+        return
+    if len(sys.argv) > 1 and sys.argv[1] == "stress":
+        import stress_fixtures
+        out = Path(__file__).parent / "out"
+        result = characterize("gox_pu_tissue", PRESETS["gox_pu_tissue"])
+        traces = stress_traces(result)
+        stress_fixtures.write_outputs(traces, result, out)
+        print(f"wrote {len(traces)} traces to {out} and {stress_fixtures.RZ_PATH}")
+        return
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", type=Path, default=Path(__file__).parent / "out")
     ap.add_argument("--mc", type=int, default=0, help="Monte Carlo samples (0 to skip)")

@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "id": 7,
+  "low_current_pa": 1000,
+  "high_current_pa": 9000,
+  "low_glucose_mgdl": 40,
+  "high_glucose_mgdl": 400,
+  "min_temp_mc": 35000,
+  "max_temp_mc": 39000,
+  "strip_lot": 4242
+}

@@ -1,0 +1,265 @@
+{
+  "layout_mm": {
+    "WE_centre_x": 8.5,
+    "WE_diameter": 1.2,
+    "CE_x": 5.5,
+    "RE_x": 3.3,
+    "WE_to_CE_edge_gap": 1.7000000000000002,
+    "CE_to_RE_edge_gap": 0.8999999999999999
+  },
+  "one_d_error": {
+    "gox_pu/beaker_stirred_50um": {
+      "coating_over_disk_only": {
+        "glucose_1d_nA": 140.0111529768613,
+        "glucose_2d_nA": 139.61401830849246,
+        "glucose_error_pct": 0.28445185747130175,
+        "apap_1d_nA": 32.931563221332404,
+        "apap_2d_nA": 51.69447752025379,
+        "apap_error_pct": -36.29578090149014
+      },
+      "coating_extends_0p5mm": {
+        "glucose_1d_nA": 140.0111529768613,
+        "glucose_2d_nA": 157.2928585699678,
+        "glucose_error_pct": -10.986961359990266,
+        "apap_1d_nA": 32.931563221332404,
+        "apap_2d_nA": 36.99638175206465,
+        "apap_error_pct": -10.987070459952209
+      },
+      "coating_everywhere": {
+        "glucose_1d_nA": 140.0111529768613,
+        "glucose_2d_nA": 157.29305135738238,
+        "glucose_error_pct": -10.987070459492344,
+        "apap_1d_nA": 32.931563221332404,
+        "apap_2d_nA": 36.99638175194361,
+        "apap_error_pct": -10.987070459660986
+      }
+    },
+    "gox_pu/tissue_100um": {
+      "coating_over_disk_only": {
+        "glucose_1d_nA": 109.849634160975,
+        "glucose_2d_nA": 109.67976671230365,
+        "glucose_error_pct": 0.15487582966595692,
+        "apap_1d_nA": 32.46442085552883,
+        "apap_2d_nA": 43.23648628126804,
+        "apap_error_pct": -24.91429427373738
+      },
+      "coating_extends_0p5mm": {
+        "glucose_1d_nA": 109.849634160975,
+        "glucose_2d_nA": 127.85999345910669,
+        "glucose_error_pct": -14.086000484500193,
+        "apap_1d_nA": 32.46442085552883,
+        "apap_2d_nA": 37.791196133546016,
+        "apap_error_pct": -14.095280972831613
+      },
+      "coating_everywhere": {
+        "glucose_1d_nA": 109.849634160975,
+        "glucose_2d_nA": 127.87380424514677,
+        "glucose_error_pct": -14.095279475394074,
+        "apap_1d_nA": 32.46442085552883,
+        "apap_2d_nA": 37.79119596420142,
+        "apap_error_pct": -14.09528058788746
+      }
+    },
+    "gox_pu/beaker_quiescent_1000um": {
+      "coating_over_disk_only": {
+        "glucose_1d_nA": 109.72105131677526,
+        "glucose_2d_nA": 109.32140447324781,
+        "glucose_error_pct": null,
+        "apap_1d_nA": 12.213029404403704,
+        "apap_2d_nA": 29.447009581205833,
+        "apap_error_pct": -58.52540010650687,
+        "note": "glucose not valid: lateral glucose supply ignored; acetaminophen only"
+      },
+      "coating_extends_0p5mm": {
+        "glucose_1d_nA": 109.72105131677526,
+        "glucose_2d_nA": 159.16335328824417,
+        "glucose_error_pct": null,
+        "apap_1d_nA": 12.213029404403704,
+        "apap_2d_nA": 22.771518546019983,
+        "apap_error_pct": -46.36708404087393,
+        "note": "glucose not valid: lateral glucose supply ignored; acetaminophen only"
+      },
+      "coating_everywhere": {
+        "glucose_1d_nA": 109.72105131677526,
+        "glucose_2d_nA": 204.442624086078,
+        "glucose_error_pct": null,
+        "apap_1d_nA": 12.213029404403704,
+        "apap_2d_nA": 22.75647093566145,
+        "apap_error_pct": -46.33161952513129,
+        "note": "glucose not valid: lateral glucose supply ignored; acetaminophen only"
+      }
+    },
+    "gox_pu_tissue/beaker_stirred_50um": {
+      "coating_over_disk_only": {
+        "glucose_1d_nA": 14.440688107879309,
+        "glucose_2d_nA": 14.399725150582535,
+        "glucose_error_pct": 0.2844704108475149,
+        "apap_1d_nA": 3.6445998822097714,
+        "apap_2d_nA": 22.963600114736916,
+        "apap_error_pct": -84.12879572889425
+      },
+      "coating_extends_0p5mm": {
+        "glucose_1d_nA": 14.440688107879309,
+        "glucose_2d_nA": 16.22311554408634,
+        "glucose_error_pct": -10.986961359939052,
+        "apap_1d_nA": 3.6445998822097714,
+        "apap_2d_nA": 5.0983920327055126,
+        "apap_error_pct": -28.514718781330583
+      },
+      "coating_everywhere": {
+        "glucose_1d_nA": 14.440688107879309,
+        "glucose_2d_nA": 16.22313542810399,
+        "glucose_error_pct": -10.987070459492543,
+        "apap_1d_nA": 3.6445998822097714,
+        "apap_2d_nA": 5.098066326944093,
+        "apap_error_pct": -28.51015172267415
+      }
+    },
+    "gox_pu_tissue/tissue_100um": {
+      "coating_over_disk_only": {
+        "glucose_1d_nA": 19.273768001265214,
+        "glucose_2d_nA": 19.246749819327817,
+        "glucose_error_pct": 0.14037789336391882,
+        "apap_1d_nA": 4.690676853134216,
+        "apap_2d_nA": 16.294352246330636,
+        "apap_error_pct": -71.21286699696503
+      },
+      "coating_extends_0p5mm": {
+        "glucose_1d_nA": 19.273768001265214,
+        "glucose_2d_nA": 22.4337938524099,
+        "glucose_error_pct": -14.086007350937768,
+        "apap_1d_nA": 4.690676853134216,
+        "apap_2d_nA": 6.610015688987222,
+        "apap_error_pct": -29.036827235535423
+      },
+      "coating_everywhere": {
+        "glucose_1d_nA": 19.273768001265214,
+        "glucose_2d_nA": 22.436215243543657,
+        "glucose_error_pct": -14.095279475394062,
+        "apap_1d_nA": 4.690676853134216,
+        "apap_2d_nA": 6.6096685159756685,
+        "apap_error_pct": -29.033099893031267
+      }
+    },
+    "gox_pu_tissue/beaker_quiescent_1000um": {
+      "coating_over_disk_only": {
+        "glucose_1d_nA": 14.253230742712152,
+        "glucose_2d_nA": 14.206406333515645,
+        "glucose_error_pct": null,
+        "apap_1d_nA": 3.0685013640738594,
+        "apap_2d_nA": 17.37718713259926,
+        "apap_error_pct": -82.34178327793103,
+        "note": "glucose not valid: lateral glucose supply ignored; acetaminophen only"
+      },
+      "coating_extends_0p5mm": {
+        "glucose_1d_nA": 14.253230742712152,
+        "glucose_2d_nA": 20.678560728564836,
+        "glucose_error_pct": null,
+        "apap_1d_nA": 3.0685013640738594,
+        "apap_2d_nA": 4.752775917827813,
+        "apap_error_pct": -35.43770173208011,
+        "note": "glucose not valid: lateral glucose supply ignored; acetaminophen only"
+      },
+      "coating_everywhere": {
+        "glucose_1d_nA": 14.253230742712152,
+        "glucose_2d_nA": 26.557965483431687,
+        "glucose_error_pct": null,
+        "apap_1d_nA": 3.0685013640738594,
+        "apap_2d_nA": 4.751573324839059,
+        "apap_error_pct": -35.42136142500142,
+        "note": "glucose not valid: lateral glucose supply ignored; acetaminophen only"
+      }
+    }
+  },
+  "crosstalk": {
+    "beaker_stirred_50um": {
+      "planar_upper_bound": {
+        "with_CE_sink": {
+          "WE_collected_frac": 0.6915733315509219,
+          "c_at_membrane_surface_over_WE_uM": 5.6358981002077595,
+          "c_RE_surface_uM": 5.896478032593552e-36,
+          "c_CE_edge_surface_uM": 9.307825232194856e-09,
+          "CE_captured_frac": 1.3467149679644018e-13
+        },
+        "no_CE": {
+          "WE_collected_frac": 0.6915733315509219,
+          "c_at_membrane_surface_over_WE_uM": 5.6358981002077595,
+          "c_RE_surface_uM": 2.5294029007931704e-29,
+          "c_CE_edge_surface_uM": 9.383665092489426e-09
+        }
+      },
+      "axisymmetric_WE_alone": {
+        "c_surface_WE_uM": 1.0324803901187545,
+        "c_at_CE_edge_uM": 1.4031794798137384e-11,
+        "c_at_RE_edge_uM": 4.695314610809151e-31,
+        "r_CE_edge_mm": 2.3,
+        "r_RE_edge_mm": 4.6
+      }
+    },
+    "tissue_100um": {
+      "planar_upper_bound": {
+        "with_CE_sink": {
+          "WE_collected_frac": 0.7042803991715708,
+          "c_at_membrane_surface_over_WE_uM": 4.3401777815677685,
+          "c_RE_surface_uM": 1.0248074967446002e-24,
+          "c_CE_edge_surface_uM": 8.166894814892265e-06,
+          "CE_captured_frac": 1.4219631618024197e-09
+        },
+        "no_CE": {
+          "WE_collected_frac": 0.7042803991715708,
+          "c_at_membrane_surface_over_WE_uM": 4.3401777815677685,
+          "c_RE_surface_uM": 2.8562082875439175e-19,
+          "c_CE_edge_surface_uM": 8.545199135848286e-06
+        }
+      },
+      "axisymmetric_WE_alone": {
+        "c_surface_WE_uM": 0.6051491113052881,
+        "c_at_CE_edge_uM": 4.5142840885793925e-07,
+        "c_at_RE_edge_uM": 1.6736505797694843e-19,
+        "r_CE_edge_mm": 2.3,
+        "r_RE_edge_mm": 4.6
+      }
+    },
+    "quiescent_5000um": {
+      "planar_upper_bound": {
+        "with_CE_sink": {
+          "WE_collected_frac": 0.8492549498669643,
+          "c_at_membrane_surface_over_WE_uM": 10.618747746178979,
+          "c_RE_surface_uM": 0.8332634285773645,
+          "c_CE_edge_surface_uM": 2.388749101419416,
+          "CE_captured_frac": 0.05177075388375946
+        },
+        "no_CE": {
+          "WE_collected_frac": 0.8610369283858103,
+          "c_at_membrane_surface_over_WE_uM": 11.360754824977324,
+          "c_RE_surface_uM": 3.261138123710448,
+          "c_CE_edge_surface_uM": 8.430014829621708
+        }
+      },
+      "axisymmetric_WE_alone": {
+        "c_surface_WE_uM": 9.273214218454346,
+        "c_at_CE_edge_uM": 3.960724358650652,
+        "c_at_RE_edge_uM": 1.2284761136758855,
+        "r_CE_edge_mm": 2.3,
+        "r_RE_edge_mm": 4.6
+      }
+    }
+  },
+  "ir_drop": {
+    "kappa_S_per_m": 1.5,
+    "cells": 102144,
+    "R_we_ce_ohm": 310.20109409348345,
+    "R_uncompensated_we_re_ohm": 267.42810313610534,
+    "phi_re_fraction": 0.1378879435689155,
+    "R_disk_to_infinity_ohm": 277.77777777777777,
+    "current_nA": {
+      "gox_pu_5mM": 140.0111529768613,
+      "gox_pu_25mM": 698.4466399026414
+    },
+    "drop_mV": {
+      "gox_pu_5mM": 0.03744291705850109,
+      "gox_pu_25mM": 0.18678426005094984
+    },
+    "coating_conductivity_for_1mV_S_per_m_at_25mM": 0.012351248358492273
+  }
+}

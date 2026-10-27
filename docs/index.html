@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open CGM Kit</title>
+<meta name="description" content="An open continuous glucose monitor: our own sensor, open electronics, open calibration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --surface: #ffffff;
+  --ink: #17191c;
+  --muted: #5d636b;
+  --line: #e2ddd5;
+  --accent: #0f7b6c;
+  --accent-ink: #ffffff;
+  --warn: #9a5b13;
+  --viewer: radial-gradient(120% 90% at 50% 35%, #ffffff 0%, #ece7df 70%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111315;
+    --surface: #181b1e;
+    --ink: #eceae6;
+    --muted: #9aa0a7;
+    --line: #2a2e33;
+    --accent: #3fc1a9;
+    --accent-ink: #0b1513;
+    --warn: #e0a458;
+    --viewer: radial-gradient(120% 90% at 50% 35%, #252a2f 0%, #121416 70%);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111315;
+  --surface: #181b1e;
+  --ink: #eceae6;
+  --muted: #9aa0a7;
+  --line: #2a2e33;
+  --accent: #3fc1a9;
+  --accent-ink: #0b1513;
+  --warn: #e0a458;
+  --viewer: radial-gradient(120% 90% at 50% 35%, #252a2f 0%, #121416 70%);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.55 Inter, system-ui, -apple-system, sans-serif;
+}
+a { color: inherit; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0;
+}
+.brand { font-weight: 600; letter-spacing: -0.01em; text-decoration: none; }
+.brand span { color: var(--accent); }
+nav .links { display: flex; gap: 20px; font-size: 14px; }
+nav .links a { text-decoration: none; color: var(--muted); }
+nav .links a:hover { color: var(--ink); }
+
+.hero {
+  display: grid; grid-template-columns: 1fr 1.15fr; gap: 32px; align-items: center;
+  padding: 32px 0 56px;
+}
+h1 {
+  font-family: "Instrument Serif", Georgia, serif; font-weight: 400;
+  font-size: clamp(44px, 6.4vw, 84px); line-height: 0.98; letter-spacing: -0.02em;
+  margin: 0 0 24px;
+}
+h1 em { color: var(--accent); }
+.lede { font-size: 18px; color: var(--muted); max-width: 30em; margin: 0 0 28px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 18px; border-radius: 999px; font-weight: 500; font-size: 15px;
+  text-decoration: none; border: 1px solid var(--line); background: var(--surface);
+}
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.status {
+  margin-top: 28px; font-size: 13px; color: var(--warn);
+  display: flex; gap: 8px; align-items: baseline;
+}
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; transform: translateY(-1px); }
+
+.viewer {
+  position: relative; aspect-ratio: 1 / 0.86; border-radius: 28px; overflow: hidden;
+  background: var(--viewer); border: 1px solid var(--line);
+}
+.viewer canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.viewer .controls {
+  position: absolute; left: 16px; bottom: 16px; display: flex; gap: 8px;
+}
+.chip {
+  font: 500 13px Inter, sans-serif; padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 85%, transparent);
+  color: var(--ink); backdrop-filter: blur(6px);
+}
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.legend {
+  position: absolute; right: 16px; top: 16px; font-size: 12px; color: var(--muted);
+  display: grid; gap: 4px; text-align: right; opacity: 0; transition: opacity .3s;
+}
+.viewer.exploded .legend { opacity: 1; }
+.fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; }
+
+section { padding: 64px 0; border-top: 1px solid var(--line); }
+h2 {
+  font-family: "Instrument Serif", Georgia, serif; font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.01em; margin: 0 0 32px;
+}
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px;
+}
+.card h3 { margin: 0 0 8px; font-size: 17px; font-weight: 600; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; }
+.card .k { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: 14px; font-weight: 600; }
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.spec { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; font-size: 15px; }
+.spec li { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px dashed var(--line); padding-bottom: 8px; }
+.spec li span:last-child { color: var(--muted); text-align: right; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat { padding: 24px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); }
+.stat b { display: block; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 44px; line-height: 1; margin-bottom: 8px; }
+.stat span { color: var(--muted); font-size: 14px; }
+figure { margin: 0; }
+figure img { width: 100%; height: auto; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+
+ol.road { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; counter-reset: s; }
+ol.road li {
+  counter-increment: s; display: grid; grid-template-columns: 48px 1fr auto; gap: 16px; align-items: center;
+  padding: 20px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+}
+ol.road li::before {
+  content: counter(s); font-family: "Instrument Serif", Georgia, serif; font-size: 36px; line-height: 1; color: var(--accent);
+}
+ol.road h3 { margin: 0 0 4px; font-size: 17px; }
+ol.road p { margin: 0; color: var(--muted); font-size: 15px; }
+ol.road a { font-size: 14px; white-space: nowrap; color: var(--accent); text-decoration: none; }
+
+footer { padding: 40px 0 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+@media (max-width: 860px) {
+  .hero, .split { grid-template-columns: 1fr; }
+  .grid3, .stats { grid-template-columns: 1fr; }
+  nav .links a:not(:last-child) { display: none; }
+  ol.road li { grid-template-columns: 36px 1fr; }
+  ol.road li a { grid-column: 2; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#">Open<span>CGM</span> Kit</a>
+    <div class="links">
+      <a href="#design">Design</a>
+      <a href="#model">Model</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="https://github.com/EricSpencer00/open-cgm-kit">GitHub</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>What if you could vibe&nbsp;code, CAD and wet&#8209;lab <em>a CGM?</em></h1>
+      <p class="lede">An open continuous glucose monitor. Our own sensor, open electronics, open calibration, and a pod you keep instead of throwing away.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/EricSpencer00/open-cgm-kit">View on GitHub</a>
+        <a class="btn" href="https://github.com/EricSpencer00/open-cgm-kit/issues/18">Roadmap</a>
+      </div>
+      <p class="status">In development. Has not measured glucose. Not for treatment decisions.</p>
+    </div>
+    <div class="viewer" id="viewer">
+      <div class="fallback" id="fallback">Loading model…</div>
+      <div class="legend">
+        <span>Pod: reusable</span>
+        <span>Base, patch, filament: disposable</span>
+      </div>
+      <div class="controls">
+        <button class="chip" id="explode" aria-pressed="false">Explode</button>
+        <button class="chip" id="spin" aria-pressed="true">Spin</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="design">
+    <h2>Keep the pod. Replace the base.</h2>
+    <div class="split">
+      <div class="card">
+        <div class="k">Reusable pod</div>
+        <h3>Electronics, radio and a rechargeable cell</h3>
+        <p>Sealed pebble that clicks into each new base and charges between wears.</p>
+        <ul class="spec">
+          <li><span>Size</span><span>28 × 23 × 6 mm</span></li>
+          <li><span>Readout</span><span>AD5940 potentiostat, nRF52840 BLE</span></li>
+          <li><span>Battery</span><span>About 3 weeks per charge</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="k">Disposable base</div>
+        <h3>Sensor, cradle and adhesive</h3>
+        <p>The only part that touches skin is the part you throw away.</p>
+        <ul class="spec">
+          <li><span>Patch</span><span>46 × 39 mm, tapered edge</span></li>
+          <li><span>Sensor</span><span>Glucose oxidase on platinum</span></li>
+          <li><span>Waste per wear</span><span>No battery, no radio</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="k">Sensor</div>
+        <h3>Enzyme electrode</h3>
+        <p>Glucose oxidase turns glucose into peroxide. A membrane meters glucose in and lets oxygen through.</p>
+      </div>
+      <div class="card">
+        <div class="k">Readout</div>
+        <h3>Open hardware</h3>
+        <p>Built on UCSD's <a href="https://github.com/ProfDrewHall/Biocoin">Biocoin</a>: potentiostat, Bluetooth, firmware and dock, all published.</p>
+      </div>
+      <div class="card">
+        <div class="k">Software</div>
+        <h3>Calibration that refuses to guess</h3>
+        <p>No glucose value without a valid calibration, a warmed-up sensor and in-range data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="model">
+    <h2>Simulated before it's soldered</h2>
+    <div class="stats">
+      <div class="stat"><b>≥600×</b><span>Oxygen-to-glucose membrane permeability for tissue-grade linearity</span></div>
+      <div class="stat"><b>3–4 nA</b><span>Signal per mM on a 1.2 mm electrode</span></div>
+      <div class="stat"><b>0.02 mM</b><span>Readout resolution at 512 kΩ gain</span></div>
+    </div>
+    <figure>
+      <img src="assets/model.png" alt="Simulated apparent versus true glucose in a beaker and at tissue oxygen, and step response" loading="lazy" width="1950" height="598">
+    </figure>
+  </section>
+
+  <section id="roadmap">
+    <h2>Roadmap</h2>
+    <ol class="road">
+      <li><div><h3>Strip rig</h3><p>Glucometer strips on our own readout and calibration.</p></div><a href="https://github.com/EricSpencer00/open-cgm-kit/labels/stage-1%3A%20strip%20rig">Issues →</a></li>
+      <li><div><h3>Coated electrodes</h3><p>Our own sensor, tested at air and tissue oxygen.</p></div><a href="https://github.com/EricSpencer00/open-cgm-kit/labels/stage-2%3A%20coated%20electrodes">Issues →</a></li>
+      <li><div><h3>Biocoin pod</h3><p>Higher-gain firmware, assembled boards, printed enclosure.</p></div><a href="https://github.com/EricSpencer00/open-cgm-kit/labels/stage-3%3A%20biocoin">Issues →</a></li>
+      <li><div><h3>Wearable</h3><p>Only after a written safety review.</p></div><a href="https://github.com/EricSpencer00/open-cgm-kit/labels/stage-4%3A%20wearable">Issues →</a></li>
+    </ol>
+  </section>
+
+  <footer>
+    <span>Hardware CERN-OHL-W-2.0 · Software MIT · Docs CC-BY-4.0</span>
+    <span>Readout based on <a href="https://github.com/ProfDrewHall/Biocoin">Biocoin</a> (UCSD)</span>
+  </footer>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from "three";
+import { STLLoader } from "three/addons/loaders/STLLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+const host = document.getElementById("viewer");
+const fallback = document.getElementById("fallback");
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+host.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(30, 1, 1, 1000);
+camera.position.set(62, -78, 58);
+camera.up.set(0, 0, 1);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0, 2);
+controls.enableDamping = true;
+controls.enablePan = false;
+controls.minDistance = 60;
+controls.maxDistance = 220;
+controls.autoRotate = !reduceMotion;
+controls.autoRotateSpeed = 0.8;
+
+const sun = new THREE.DirectionalLight(0xffffff, 1.6);
+sun.position.set(-40, -30, 90);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -50, right: 50, top: 50, bottom: -50 });
+scene.add(sun, new THREE.HemisphereLight(0xffffff, 0x8a8178, 0.6));
+
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.ShadowMaterial({ opacity: 0.12 }));
+ground.position.z = -0.01;
+ground.receiveShadow = true;
+scene.add(ground);
+
+const mat = {
+  pod_shell: new THREE.MeshPhysicalMaterial({ color: 0xece7df, roughness: 0.32, clearcoat: 0.8, clearcoatRoughness: 0.18 }),
+  pod_floor: new THREE.MeshPhysicalMaterial({ color: 0x2b2f36, roughness: 0.55, metalness: 0.1 }),
+  base: new THREE.MeshPhysicalMaterial({ color: 0x9fb8b2, roughness: 0.45, sheen: 0.4 }),
+  patch: new THREE.MeshStandardMaterial({ color: 0xf7f4ef, roughness: 0.95 }),
+  filament: new THREE.MeshStandardMaterial({ color: 0xc8a165, metalness: 0.9, roughness: 0.25 }),
+};
+// Assembled z from mechanical/product_B1/product_B1.json; exploded adds lift.
+const place = {
+  patch: [0, 0], filament: [0, -6], base: [0.4, 5], pod_floor: [1.2, 18], pod_shell: [1.2, 18],
+};
+const meshes = {};
+const loader = new STLLoader();
+await Promise.all(Object.keys(place).map(name => new Promise((resolve, reject) => {
+  loader.load(`assets/${name}.stl`, geo => {
+    geo.computeVertexNormals();
+    const m = new THREE.Mesh(geo, mat[name]);
+    m.castShadow = m.receiveShadow = name !== "patch";
+    m.position.z = place[name][0];
+    scene.add(meshes[name] = m);
+    resolve();
+  }, undefined, reject);
+}))).then(() => fallback.remove(), () => { fallback.textContent = "3D model unavailable"; });
+
+let exploded = false;
+const explodeBtn = document.getElementById("explode");
+explodeBtn.addEventListener("click", () => {
+  exploded = !exploded;
+  explodeBtn.setAttribute("aria-pressed", exploded);
+  explodeBtn.textContent = exploded ? "Assemble" : "Explode";
+  host.classList.toggle("exploded", exploded);
+});
+const spinBtn = document.getElementById("spin");
+spinBtn.setAttribute("aria-pressed", controls.autoRotate);
+spinBtn.addEventListener("click", () => {
+  controls.autoRotate = !controls.autoRotate;
+  spinBtn.setAttribute("aria-pressed", controls.autoRotate);
+});
+
+function resize() {
+  const { clientWidth: w, clientHeight: h } = host;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(host);
+resize();
+
+renderer.setAnimationLoop(() => {
+  for (const [name, [z0, lift]] of Object.entries(place)) {
+    const m = meshes[name];
+    if (!m) continue;
+    const target = z0 + (exploded ? lift : 0);
+    m.position.z += (target - m.position.z) * (reduceMotion ? 1 : 0.08);
+  }
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

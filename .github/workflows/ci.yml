@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install numpy scipy matplotlib shapely mapbox-earcut
+      - name: Upstream Biocoin files match pinned hashes
+        run: |
+          python - <<'EOF'
+          import hashlib, json, pathlib
+          root = pathlib.Path("vendor/biocoin")
+          m = json.loads((root / "UPSTREAM_MANIFEST.json").read_text())
+          bad = [f["path"] for f in m["files"]
+                 if hashlib.sha256((root / f["path"]).read_bytes()).hexdigest() != f["sha256"]]
+          print(f"{len(m['files'])} files checked")
+          raise SystemExit(f"changed: {bad}" if bad else 0)
+          EOF
+      - name: Electrode model
+        run: cd models && python -m unittest -v
+      - name: Bridge and protocol (Resilient cases skip without rz)
+        run: python -m unittest discover -s software/bridge -v
+      - name: Product CAD meshes validate
+        run: python mechanical/product_B1.py
+      - name: Power budget
+        run: python hardware/ock_p1/power_budget.py
+
+  firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Frame encoder (C)
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -Ifirmware/common firmware/common/test/test_ock_frame.c -o /tmp/test_ock_frame
+          /tmp/test_ock_frame
+      - uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-${{ hashFiles('firmware/strip-rig/platformio.ini', 'vendor/biocoin/firmware/platformio.ini') }}
+      - run: pip install platformio
+      - name: Strip rig
+        run: |
+          pio test -d firmware/strip-rig -e native
+          pio run -d firmware/strip-rig -e esp32dev
+      - name: Patched Biocoin firmware
+        run: |
+          sh firmware/biocoin-patches/apply.sh
+          pio run -d build/biocoin-firmware -e release

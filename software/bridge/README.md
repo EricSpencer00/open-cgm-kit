@@ -28,3 +28,14 @@ The pinned firmware's BLE disconnect callback stops battery monitoring but does 
 Live results contain measured `raw_current_pA` and `glucose_mgdl: null`. The CA stream carries **no acquisition timestamp, device sequence or concurrent temperature**. The bridge reports host receipt age separately, does not invent missing observations, and keeps glucose unavailable through the Resilient guards. Upstream also documents possible TX byte drops. Float reassembly can handle fragmentation, but cannot reliably detect lost bytes or prove sample freshness. A complete CGM transport needs timestamped, framed, versioned samples with sequence, technique identity, temperature and integrity checks, plus characterized batching latency. This bridge is useful for bench current logging before that firmware work.
 
 Source alignment: upstream `software/src/biocoin/device.py`, `techniques/ca.py`, `techniques/base_technique.py`, and `firmware/docs/BLE_PROTOCOL.md`. CA config is an 18-byte `<BffffB` packet including the technique ID; the parameter struct itself is 17 bytes. Data floats are current in µA, converted to integer pA. Status values are 0 stopped, 1 invalid parameters, 2 running, 3 error, 4 current limit exceeded. The firmware's acquisition-running state does not establish that sensor chemistry is stable.
+
+## Framed protocol (strip rig and patched Biocoin)
+
+`ock_protocol.py` decodes the 20-byte frames in `docs/PROTOCOL.md`: CRC, version, truncation, sequence gaps and regressions, and byte-loss resynchronization. `--device strip-rig` or `--device biocoin-ock` captures over BLE (`biocoin` stays the pinned upstream float stream); `--replay capture.hex` feeds a recorded session through the same path without BLE. `--csv` logs device time, host time, sequence, raw current, temperature, status, strip lot and calibration id per sample.
+
+```sh
+python3 software/bridge/biocoin_bridge.py --replay software/bridge/fixtures/strip_rig_session.hex \
+  --calibration software/bridge/fixtures/strip_rig_calibration.json --csv /tmp/session.csv
+```
+
+Glucose is emitted only if `--calibration` is given, the device's identity frame carries the same calibration id (and strip lot, when the file pins one), temperature is valid and the sample is not settling or over range. The fixture calibration is synthetic.
