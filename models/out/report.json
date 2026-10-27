@@ -1,0 +1,399 @@
+{
+  "presets": [
+    {
+      "name": "bare_gox",
+      "mode": "pt",
+      "area_mm2": 1.131,
+      "beaker": {
+        "sensitivity_nA_per_mM": 294.91698566111444,
+        "linear_to_mM": 2.0,
+        "current_at_25mM_nA": 1902.5846492867695,
+        "t90_5_to_10mM_s": 3.005008347245409
+      },
+      "tissue": {
+        "sensitivity_nA_per_mM": 15.69523985820795,
+        "linear_to_mM": 1.0,
+        "current_at_25mM_nA": 139.87525956304685
+      },
+      "acetaminophen_0p13mM_glucose_equiv_mM": 1.042195843837298,
+      "readout": [
+        {
+          "rtia": "10K",
+          "lsb_nA": 3.7027994791666665,
+          "usable_full_scale_nA": 97066.66666666667,
+          "lsb_glucose_mM": 0.23591862963663204,
+          "fits": true
+        },
+        {
+          "rtia": "20K",
+          "lsb_nA": 1.8513997395833333,
+          "usable_full_scale_nA": 48533.333333333336,
+          "lsb_glucose_mM": 0.11795931481831602,
+          "fits": true
+        },
+        {
+          "rtia": "40K",
+          "lsb_nA": 0.9256998697916666,
+          "usable_full_scale_nA": 24266.666666666668,
+          "lsb_glucose_mM": 0.05897965740915801,
+          "fits": true
+        },
+        {
+          "rtia": "80K",
+          "lsb_nA": 0.4628499348958333,
+          "usable_full_scale_nA": 12133.333333333334,
+          "lsb_glucose_mM": 0.029489828704579005,
+          "fits": true
+        },
+        {
+          "rtia": "160K",
+          "lsb_nA": 0.23142496744791666,
+          "usable_full_scale_nA": 6066.666666666667,
+          "lsb_glucose_mM": 0.014744914352289503,
+          "fits": true
+        },
+        {
+          "rtia": "512K",
+          "lsb_nA": 0.07232030232747397,
+          "usable_full_scale_nA": 1895.8333333333337,
+          "lsb_glucose_mM": 0.00460778573509047,
+          "fits": false
+        }
+      ],
+      "recommended_rtia": "160K"
+    },
+    {
+      "name": "gox_pu",
+      "mode": "pt",
+      "area_mm2": 1.131,
+      "beaker": {
+        "sensitivity_nA_per_mM": 28.000954712919185,
+        "linear_to_mM": 30.0,
+        "current_at_25mM_nA": 698.4466399070435,
+        "t90_5_to_10mM_s": 6.010016694490818
+      },
+      "tissue": {
+        "sensitivity_nA_per_mM": 18.396805768201567,
+        "linear_to_mM": 2.0,
+        "current_at_25mM_nA": 109.91670694439483
+      },
+      "acetaminophen_0p13mM_glucose_equiv_mM": 1.176087156992643,
+      "readout": [
+        {
+          "rtia": "10K",
+          "lsb_nA": 3.7027994791666665,
+          "usable_full_scale_nA": 97066.66666666667,
+          "lsb_glucose_mM": 0.20127404321280956,
+          "fits": true
+        },
+        {
+          "rtia": "20K",
+          "lsb_nA": 1.8513997395833333,
+          "usable_full_scale_nA": 48533.333333333336,
+          "lsb_glucose_mM": 0.10063702160640478,
+          "fits": true
+        },
+        {
+          "rtia": "40K",
+          "lsb_nA": 0.9256998697916666,
+          "usable_full_scale_nA": 24266.666666666668,
+          "lsb_glucose_mM": 0.05031851080320239,
+          "fits": true
+        },
+        {
+          "rtia": "80K",
+          "lsb_nA": 0.4628499348958333,
+          "usable_full_scale_nA": 12133.333333333334,
+          "lsb_glucose_mM": 0.025159255401601195,
+          "fits": true
+        },
+        {
+          "rtia": "160K",
+          "lsb_nA": 0.23142496744791666,
+          "usable_full_scale_nA": 6066.666666666667,
+          "lsb_glucose_mM": 0.012579627700800598,
+          "fits": true
+        },
+        {
+          "rtia": "512K",
+          "lsb_nA": 0.07232030232747397,
+          "usable_full_scale_nA": 1895.8333333333337,
+          "lsb_glucose_mM": 0.003931133656500187,
+          "fits": true
+        }
+      ],
+      "recommended_rtia": "512K"
+    },
+    {
+      "name": "gox_pu_tissue",
+      "mode": "pt",
+      "area_mm2": 1.131,
+      "beaker": {
+        "sensitivity_nA_per_mM": 2.888136495136074,
+        "linear_to_mM": 30.0,
+        "current_at_25mM_nA": 72.20289295762596,
+        "t90_5_to_10mM_s": 6.010016694490818
+      },
+      "tissue": {
+        "sensitivity_nA_per_mM": 3.8547438116848265,
+        "linear_to_mM": 30.0,
+        "current_at_25mM_nA": 96.34075707246342
+      },
+      "acetaminophen_0p13mM_glucose_equiv_mM": 1.2619209266417353,
+      "readout": [
+        {
+          "rtia": "10K",
+          "lsb_nA": 3.7027994791666665,
+          "usable_full_scale_nA": 97066.66666666667,
+          "lsb_glucose_mM": 0.9605825082181666,
+          "fits": true
+        },
+        {
+          "rtia": "20K",
+          "lsb_nA": 1.8513997395833333,
+          "usable_full_scale_nA": 48533.333333333336,
+          "lsb_glucose_mM": 0.4802912541090833,
+          "fits": true
+        },
+        {
+          "rtia": "40K",
+          "lsb_nA": 0.9256998697916666,
+          "usable_full_scale_nA": 24266.666666666668,
+          "lsb_glucose_mM": 0.24014562705454165,
+          "fits": true
+        },
+        {
+          "rtia": "80K",
+          "lsb_nA": 0.4628499348958333,
+          "usable_full_scale_nA": 12133.333333333334,
+          "lsb_glucose_mM": 0.12007281352727082,
+          "fits": true
+        },
+        {
+          "rtia": "160K",
+          "lsb_nA": 0.23142496744791666,
+          "usable_full_scale_nA": 6066.666666666667,
+          "lsb_glucose_mM": 0.06003640676363541,
+          "fits": true
+        },
+        {
+          "rtia": "512K",
+          "lsb_nA": 0.07232030232747397,
+          "usable_full_scale_nA": 1895.8333333333337,
+          "lsb_glucose_mM": 0.01876137711363607,
+          "fits": true
+        }
+      ],
+      "recommended_rtia": "512K"
+    },
+    {
+      "name": "pb_gox_pu",
+      "mode": "pb",
+      "area_mm2": 1.131,
+      "beaker": {
+        "sensitivity_nA_per_mM": 28.000954712919185,
+        "linear_to_mM": 30.0,
+        "current_at_25mM_nA": 698.4466399070435,
+        "t90_5_to_10mM_s": 6.010016694490818
+      },
+      "tissue": {
+        "sensitivity_nA_per_mM": 18.396805768201567,
+        "linear_to_mM": 2.0,
+        "current_at_25mM_nA": 109.91670694439483
+      },
+      "acetaminophen_0p13mM_glucose_equiv_mM": 0.0,
+      "readout": [
+        {
+          "rtia": "10K",
+          "lsb_nA": 3.7027994791666665,
+          "usable_full_scale_nA": 97066.66666666667,
+          "lsb_glucose_mM": 0.20127404321280956,
+          "fits": true
+        },
+        {
+          "rtia": "20K",
+          "lsb_nA": 1.8513997395833333,
+          "usable_full_scale_nA": 48533.333333333336,
+          "lsb_glucose_mM": 0.10063702160640478,
+          "fits": true
+        },
+        {
+          "rtia": "40K",
+          "lsb_nA": 0.9256998697916666,
+          "usable_full_scale_nA": 24266.666666666668,
+          "lsb_glucose_mM": 0.05031851080320239,
+          "fits": true
+        },
+        {
+          "rtia": "80K",
+          "lsb_nA": 0.4628499348958333,
+          "usable_full_scale_nA": 12133.333333333334,
+          "lsb_glucose_mM": 0.025159255401601195,
+          "fits": true
+        },
+        {
+          "rtia": "160K",
+          "lsb_nA": 0.23142496744791666,
+          "usable_full_scale_nA": 6066.666666666667,
+          "lsb_glucose_mM": 0.012579627700800598,
+          "fits": true
+        },
+        {
+          "rtia": "512K",
+          "lsb_nA": 0.07232030232747397,
+          "usable_full_scale_nA": 1895.8333333333337,
+          "lsb_glucose_mM": 0.003931133656500187,
+          "fits": true
+        }
+      ],
+      "recommended_rtia": "512K"
+    },
+    {
+      "name": "dropsens_4mm_gox_pu",
+      "mode": "pt",
+      "area_mm2": 12.566,
+      "beaker": {
+        "sensitivity_nA_per_mM": 311.12171903243535,
+        "linear_to_mM": 30.0,
+        "current_at_25mM_nA": 7760.518221189372,
+        "t90_5_to_10mM_s": 6.010016694490818
+      },
+      "tissue": {
+        "sensitivity_nA_per_mM": 204.4089529800174,
+        "linear_to_mM": 2.0,
+        "current_at_25mM_nA": 1221.2967438266091
+      },
+      "acetaminophen_0p13mM_glucose_equiv_mM": 1.176087156992643,
+      "readout": [
+        {
+          "rtia": "10K",
+          "lsb_nA": 3.7027994791666665,
+          "usable_full_scale_nA": 97066.66666666667,
+          "lsb_glucose_mM": 0.018114663889152862,
+          "fits": true
+        },
+        {
+          "rtia": "20K",
+          "lsb_nA": 1.8513997395833333,
+          "usable_full_scale_nA": 48533.333333333336,
+          "lsb_glucose_mM": 0.009057331944576431,
+          "fits": true
+        },
+        {
+          "rtia": "40K",
+          "lsb_nA": 0.9256998697916666,
+          "usable_full_scale_nA": 24266.666666666668,
+          "lsb_glucose_mM": 0.0045286659722882155,
+          "fits": true
+        },
+        {
+          "rtia": "80K",
+          "lsb_nA": 0.4628499348958333,
+          "usable_full_scale_nA": 12133.333333333334,
+          "lsb_glucose_mM": 0.0022643329861441078,
+          "fits": true
+        },
+        {
+          "rtia": "160K",
+          "lsb_nA": 0.23142496744791666,
+          "usable_full_scale_nA": 6066.666666666667,
+          "lsb_glucose_mM": 0.0011321664930720539,
+          "fits": false
+        },
+        {
+          "rtia": "512K",
+          "lsb_nA": 0.07232030232747397,
+          "usable_full_scale_nA": 1895.8333333333337,
+          "lsb_glucose_mM": 0.0003538020290850169,
+          "fits": false
+        }
+      ],
+      "recommended_rtia": "80K"
+    }
+  ],
+  "monte_carlo": {
+    "n": 200,
+    "ranges": {
+      "enzyme_u_per_cm2": [
+        0.1,
+        10.0
+      ],
+      "km_glucose_mM": [
+        10.0,
+        60.0
+      ],
+      "km_oxygen_mM": [
+        0.1,
+        0.6
+      ],
+      "membrane_um": [
+        5.0,
+        30.0
+      ],
+      "membrane_glucose_ratio": [
+        0.0003,
+        0.01
+      ],
+      "membrane_d_ratio": [
+        0.02,
+        0.3
+      ],
+      "membrane_oxygen_ratio": [
+        0.05,
+        0.5
+      ],
+      "membrane_ap_over_glucose": [
+        1.0,
+        30.0
+      ],
+      "boundary_um": [
+        20.0,
+        150.0
+      ]
+    },
+    "summary": {
+      "sensitivity_nA_per_mM": {
+        "p10": 4.670056657171453,
+        "p50": 20.565896814577414,
+        "p90": 69.4155438887845
+      },
+      "tissue_linear_to_mM": {
+        "p10": 2.0,
+        "p50": 2.0,
+        "p90": 15.0
+      },
+      "t90_s": {
+        "p10": 5.006954102920723,
+        "p50": 15.020862308762169,
+        "p90": 30.041724617524338
+      },
+      "ap_glucose_equiv_mM": {
+        "p10": 0.19387340928644733,
+        "p50": 0.7033300628134407,
+        "p90": 2.3631736312971205
+      }
+    },
+    "top_drivers_spearman": {
+      "sensitivity_nA_per_mM": {
+        "membrane_glucose_ratio": 0.8865266631665794,
+        "membrane_um": -0.44043201080027006,
+        "membrane_ap_over_glucose": 0.0928283207080177
+      },
+      "tissue_linear_to_mM": {
+        "membrane_glucose_ratio": -0.8458308837153496,
+        "membrane_um": 0.2871075763284896,
+        "membrane_ap_over_glucose": -0.10413341090438884
+      },
+      "t90_s": {
+        "boundary_um": 0.6413225272011225,
+        "enzyme_u_per_cm2": -0.3819005584823795,
+        "km_glucose_mM": 0.16643491198975635
+      },
+      "ap_glucose_equiv_mM": {
+        "membrane_ap_over_glucose": 0.983102077551939,
+        "membrane_oxygen_ratio": -0.14537913447836195,
+        "boundary_um": -0.09518187954698867
+      }
+    }
+  }
+}

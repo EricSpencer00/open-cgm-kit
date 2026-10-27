@@ -1,0 +1,17 @@
+Open CGM Kit licensing notice
+
+Copyright (c) 2026 Eric Spencer for original project material.
+
+Original hardware/electrode/mechanical designs: CERN-OHL-W-2.0.
+Original software and tools: MIT.
+Original documentation: CC-BY-4.0.
+
+The complete license texts are in LICENSES/.
+Third-party files in vendor/biocoin/ retain their upstream licensing notice,
+attribution and any more specific notices. See docs/ATTRIBUTION.md.
+Unlicensed third-party reference projects are linked only, not redistributed.
+No supplier's unpublished formulation is licensed or represented as available.
+
+Original design source location in this local snapshot: this repository.
+Before distributing physical products or publishing this package, provide the
+applicable source location and notices as required by the chosen hardware license.

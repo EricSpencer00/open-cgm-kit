@@ -32,6 +32,7 @@ and sensor measurements remain open. There is no released inserter design.
 | Resilient code and BLE bridge | `software/README.md` |
 | Supplier handoff / local printing | `docs/FABRICATION.md` |
 | Own-sensor chemistry and experiments | `docs/SENSOR_PROCESS.md` |
+| Dry-lab electrode model and findings | `models/README.md` |
 | Dexcom / Libre open auxiliary inventory | `docs/OPEN_HARDWARE_CATALOG.md` |
 | Cost and smallest order | `docs/COST_AND_BOX.md` |
 | Exact remaining release gates | `docs/RELEASE_STATUS.md` |
