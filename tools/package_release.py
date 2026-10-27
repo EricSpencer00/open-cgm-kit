@@ -39,7 +39,7 @@ def main():
     (OUT/'package_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     packs=[]
     packs.append(archive('open-cgm-kit-A0.zip',files+[OUT/'package_manifest.json',OUT/'software_verification.json']))
-    common=[ROOT/'README.md',ROOT/'LICENSE',*list((ROOT/'LICENSES').glob('*'))]
+    common=[ROOT/'README.md',ROOT/'docs/A0_PACKAGE.md',ROOT/'LICENSE',*list((ROOT/'LICENSES').glob('*'))]
     print_files=[ROOT/'mechanical/generated/base_fit_prototype.stl',ROOT/'mechanical/generated/lid_fit_prototype.stl',ROOT/'mechanical/open_cgm_A0.scad',ROOT/'mechanical/parameters.json',ROOT/'mechanical/generated/geometry_validation.json',ROOT/'docs/FABRICATION.md',ROOT/'docs/RELEASE_STATUS.md',ROOT/'docs/PRINT_JOB.md']
     packs.append(archive('enclosure-fit-print-A0.zip',common+print_files))
     sensor=[p for p in files if str(p.relative_to(ROOT)).startswith('hardware/')]
