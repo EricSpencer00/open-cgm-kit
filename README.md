@@ -37,6 +37,9 @@ RZ_BIN=/path/to/rz python3 -m unittest discover -s software/bridge -v
 | `models/` | Electrode reaction-diffusion model, membrane spec, readout resolution |
 | `software/` | Resilient calibration core and Biocoin BLE bridge |
 | `hardware/`, `mechanical/` | A0 electrode masks, enclosure and pad CAD |
+| `hardware/ock_p1/` | OCK-P1 pod board: 22 × 18 mm, glucose-only Biocoin derivative (KiCad) |
+| `mechanical/product_B1.py` | B1 product: reusable pod, disposable base and patch (STL, render) |
+| `docs/index.html` | Landing page with live 3D viewer (GitHub Pages from `/docs`) |
 | `vendor/biocoin/` | Upstream [Biocoin](https://github.com/ProfDrewHall/Biocoin) readout (PCB, firmware, host), pinned and hashed |
 | `docs/A0_PACKAGE.md` | Full A0 package: contents, delivered box, Bluetooth, provenance |
 | `docs/SENSOR_PROCESS.md` | Sensor chemistry, layer stack, bench test gates |

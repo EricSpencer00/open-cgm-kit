@@ -1,0 +1,107 @@
+use "synthetic_fixtures.rz";
+use "calibration_guard.rz";
+
+fn policy() -> GuardPolicy {
+    return new GuardPolicy {
+        max_calibration_age_ms: 86400000,
+        min_sensitivity_permille: 850,
+        max_sensitivity_permille: 1150,
+        max_rate_mgdl_per_min_x10: 40,
+        rate_window_ms: 900000,
+    };
+}
+
+fn status_of(SensorSample sample, Calibration cal, int cal_age, int now, GuardPolicy p, GuardState state) -> string {
+    return evaluate_guarded(sample, cal, 300000, cal_age, now, p, state).status;
+}
+
+fn run_guard_tests() {
+    let cal = synthetic_calibration();
+    // calibration line: -200 pA at 40 mg/dL, 3400 pA at 400 mg/dL; 220 mg/dL is 1600 pA.
+    assert(sensitivity_permille(220, 1600, cal) == 1000, "unchanged sensitivity");
+    assert(sensitivity_permille(220, 800, cal) == 500, "half the expected current");
+    assert(sensitivity_permille(220, 1760, cal) == 1100, "ten percent high");
+    assert(sensitivity_permille(220, -1600, cal) == -1000, "inverted response");
+    assert(sensitivity_permille(40, -200, cal) == -1000000, "reference at the low point is unusable");
+    assert(sensitivity_permille(39, 800, cal) == -1000000, "reference below calibration");
+    assert(sensitivity_permille(401, 800, cal) == -1000000, "reference above calibration");
+    assert(sensitivity_permille(400, 3400, cal) == 1000, "top of the calibration");
+    assert(sensitivity_permille(220, 1000000001, cal) == -1000000, "current out of bounds");
+    let flat = synthetic_calibration();
+    flat.high_current_pa = flat.low_current_pa;
+    assert(sensitivity_permille(220, 1600, flat) == -1000000, "invalid calibration");
+    let zero = synthetic_calibration();
+    zero.low_current_pa = 0;
+    zero.high_current_pa = 3600;
+    assert(sensitivity_permille(40, 0, zero) == -1000000, "reference at low point with zero expected");
+
+    let p = policy();
+    assert(guard_policy_valid(p), "policy valid");
+    let bad = policy();
+    bad.min_sensitivity_permille = 1200;
+    assert(guard_policy_valid(bad) == false, "inverted band");
+    bad = policy();
+    bad.max_calibration_age_ms = 0;
+    assert(guard_policy_valid(bad) == false, "zero calibration life");
+    bad = policy();
+    bad.rate_window_ms = 3600001;
+    assert(guard_policy_valid(bad) == false, "window too long");
+
+    // drift latch
+    let state = fresh_guard_state();
+    state = check_reference(state, 220, 1600, cal, p);
+    assert(state.drift_flagged == false && state.last_check_permille == 1000, "in-band check");
+    state = check_reference(state, 220, 1360, cal, p);
+    assert(state.last_check_permille == 850 && state.drift_flagged == false, "band edge is inside");
+    state = check_reference(state, 220, 1359, cal, p);
+    assert(state.drift_flagged, "just below the band latches");
+    state = check_reference(state, 220, 1600, cal, p);
+    assert(state.drift_flagged, "a later good check does not clear");
+    assert(fresh_guard_state().drift_flagged == false, "new calibration clears");
+    let unusable = check_reference(fresh_guard_state(), 40, 800, cal, p);
+    assert(unusable.drift_flagged == false && unusable.last_check_permille == -1000000, "unusable check changes nothing");
+    let high = check_reference(fresh_guard_state(), 220, 1761, cal, p);
+    assert(high.drift_flagged == false, "within the upper band");
+    high = check_reference(fresh_guard_state(), 220, 1850, cal, p);
+    assert(high.drift_flagged, "baseline rise above the band flags too");
+
+    // refusal order and calibration expiry
+    let s = synthetic_sample(1600, 37000, 0, 2);
+    let ok = fresh_guard_state();
+    assert(status_of(s, cal, 0, 0, p, ok) == "ready", "fresh calibration serves");
+    assert(status_of(s, cal, 86400000, 0, p, ok) == "ready", "exactly at the limit");
+    assert(status_of(s, cal, 86400001, 0, p, ok) == "calibration_expired", "stale calibration refused");
+    assert(status_of(s, cal, -1, 0, p, ok) == "calibration_clock_invalid", "invalid calibration clock");
+    assert(status_of(s, cal, 0, 0, bad, ok) == "invalid_configuration", "bad policy refused");
+    let flagged = check_reference(fresh_guard_state(), 220, 800, cal, p);
+    assert(status_of(s, cal, 0, 0, p, flagged) == "calibration_drift", "drift refused");
+    assert(status_of(s, cal, 86400001, 0, p, flagged) == "calibration_expired", "expiry reported before drift");
+    let refused = evaluate_guarded(s, cal, 300000, 86400001, 0, p, ok);
+    assert(refused.has_glucose == false && refused.glucose_mgdl == -1 && refused.calibration_id == 0, "sentinel on refusal");
+    assert(status_of(synthetic_sample(3401, 37000, 0, 2), cal, 0, 0, p, ok) == "outside_current_calibration", "range check still applies");
+    assert(status_of(synthetic_sample(1600, 40000, 0, 2), cal, 0, 0, p, ok) == "outside_temperature_calibration", "temperature check still applies");
+    assert(status_of(synthetic_sample(1600, 37000, 0, 3), cal, 0, 0, p, ok) == "sensor_fault", "fault still applies");
+    let disabled = synthetic_calibration();
+    disabled.enabled = false;
+    assert(status_of(s, disabled, 0, 0, p, ok) == "uncalibrated", "disabled calibration refused");
+    assert(status_of(s, flat, 0, 0, p, ok) == "invalid_calibration", "invalid calibration refused");
+
+    // rate limit: 4.0 mg/dL/min
+    assert(rate_exceeds(100, 0, 140, 600000, p) == false, "4.0 mg/dL/min is allowed");
+    assert(rate_exceeds(100, 0, 141, 600000, p), "just above the limit");
+    assert(rate_exceeds(100, 0, 60, 600000, p) == false, "falling at the limit");
+    assert(rate_exceeds(100, 0, 59, 600000, p), "falling above the limit");
+    assert(rate_exceeds(100, 0, 300, 900001, p) == false, "no comparison across a long gap");
+    assert(rate_exceeds(100, 600000, 300, 600000, p) == false, "no comparison without elapsed time");
+    let baseline = note_reading(fresh_guard_state(), evaluate(s, cal, 300000), 0);
+    assert(baseline.has_last && baseline.last_mgdl == 220 && baseline.last_time_ms == 0, "accepted reading becomes baseline");
+    let jump = synthetic_sample(-200, 37000, 0, 2);
+    assert(status_of(jump, cal, 0, 300000, p, baseline) == "implausible_rate", "jump from 220 to 40 mg/dL in 5 min");
+    let after = note_reading(baseline, evaluate_guarded(jump, cal, 300000, 0, 300000, p, baseline), 300000);
+    assert(after.last_mgdl == 220 && after.last_time_ms == 0, "refused reading is not a baseline");
+    assert(status_of(s, cal, 0, 300000, p, after) == "ready", "back to normal accepted");
+
+    println("Calibration guard checks passed");
+}
+
+run_guard_tests();

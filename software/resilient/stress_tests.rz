@@ -1,0 +1,137 @@
+use "stress_fixtures.rz";
+
+struct Summary {
+    int ready,
+    int expired,
+    int drift,
+    int rate,
+    int outside_current,
+    int other,
+    int first_drift_sample,
+    int worst_error_pct,
+    int bad_accepted,
+}
+
+fn abs_int(int x) -> int {
+    if x < 0 { return 0 - x; }
+    return x;
+}
+
+// Replays one 72 h trace with a fingerstick reference check every 12 h. With use_guard the
+// readings pass through evaluate_guarded, otherwise plain evaluate. "bad" is an accepted
+// reading more than 25 % from the interstitial glucose the sensor should have read.
+fn replay(array current_pa, Calibration cal, GuardPolicy policy, bool use_guard) -> Summary {
+    let blood = stress_blood_mgdl();
+    let isf = stress_isf_mgdl();
+    let step = stress_step_ms();
+    let state = fresh_guard_state();
+    let out = new Summary {
+        ready: 0, expired: 0, drift: 0, rate: 0, outside_current: 0, other: 0,
+        first_drift_sample: -1, worst_error_pct: 0, bad_accepted: 0,
+    };
+    let i = 0;
+    while i < stress_samples() {
+        let now = i * step;
+        let due = i % 144;
+        if i > 0 && due == 0 {
+            state = check_reference(state, blood[i], current_pa[i], cal, policy);
+        }
+        let sample = new SensorSample {
+            sequence: i + 1, raw_current_pa: current_pa[i], temp_mc: 37000, age_ms: 0, sensor_state: 2,
+        };
+        let result = evaluate(sample, cal, 900000);
+        if use_guard {
+            result = evaluate_guarded(sample, cal, 900000, now, now, policy, state);
+            state = note_reading(state, result, now);
+        }
+        if result.has_glucose {
+            out.ready = out.ready + 1;
+            let err = abs_int(result.glucose_mgdl - isf[i]) * 100 / isf[i];
+            if err > out.worst_error_pct { out.worst_error_pct = err; }
+            if err > 25 { out.bad_accepted = out.bad_accepted + 1; }
+        }
+        if result.status == "calibration_expired" { out.expired = out.expired + 1; }
+        if result.status == "calibration_drift" {
+            out.drift = out.drift + 1;
+            if out.first_drift_sample < 0 { out.first_drift_sample = i; }
+        }
+        if result.status == "implausible_rate" { out.rate = out.rate + 1; }
+        if result.status == "outside_current_calibration" { out.outside_current = out.outside_current + 1; }
+        if result.has_glucose == false && result.status != "calibration_expired" && result.status != "calibration_drift"
+            && result.status != "implausible_rate" && result.status != "outside_current_calibration" {
+            out.other = out.other + 1;
+        }
+        i = i + 1;
+    }
+    return out;
+}
+
+fn show(string name, Summary s) {
+    println(name + ": ready " + s.ready + " expired " + s.expired + " drift " + s.drift + " rate " + s.rate
+        + " outside " + s.outside_current + " other " + s.other + " first_drift " + s.first_drift_sample
+        + " worst_err% " + s.worst_error_pct + " bad " + s.bad_accepted);
+}
+
+fn run_stress_tests() {
+    assert(stress_samples() == 864, "fixture length");
+    let cal = stress_calibration();
+    let policy = stress_policy();
+
+    let nominal = replay(nominal_current_pa(), cal, policy, true);
+    show("nominal guarded", nominal);
+    assert(nominal.ready == 864, "nominal trace accepted in full");
+    assert(nominal.drift == 0 && nominal.rate == 0 && nominal.expired == 0, "no false flags on nominal");
+    assert(nominal.bad_accepted == 0, "nominal accuracy");
+
+    // Enzyme loss: invisible to the core until a reference check (every 12 h) shows it, then latched.
+    let enzyme = replay(enzyme_loss_current_pa(), cal, policy, true);
+    let enzyme_plain = replay(enzyme_loss_current_pa(), cal, policy, false);
+    show("enzyme loss guarded", enzyme);
+    show("enzyme loss plain", enzyme_plain);
+    assert(enzyme.first_drift_sample == 576, "flagged at the 48 h check");
+    assert(enzyme.drift == 288, "refused from the flag to the end");
+    assert(enzyme_plain.bad_accepted > 200, "unguarded core serves wrong values");
+    assert(enzyme.bad_accepted * 4 < enzyme_plain.bad_accepted, "guard removes most wrong values");
+    assert(enzyme.bad_accepted > 0, "detection latency: errors served before the check that flags");
+
+    // Fouling: sensitivity falls from the start, caught at the first check.
+    let fouling = replay(fouling_current_pa(), cal, policy, true);
+    let fouling_plain = replay(fouling_current_pa(), cal, policy, false);
+    show("fouling guarded", fouling);
+    show("fouling plain", fouling_plain);
+    assert(fouling.first_drift_sample == 144, "flagged at the 12 h check");
+    assert(fouling.bad_accepted == 0, "no wrong value after the flag");
+    assert(fouling_plain.bad_accepted > 500, "unguarded core serves wrong values");
+
+    // Reference drift: flagged by check; the core's own current-range check also refuses the tail.
+    let refdrift = replay(reference_drift_current_pa(), cal, policy, true);
+    let refdrift_plain = replay(reference_drift_current_pa(), cal, policy, false);
+    show("reference drift guarded", refdrift);
+    show("reference drift plain", refdrift_plain);
+    assert(refdrift.first_drift_sample == 432, "flagged at the 36 h check");
+    assert(refdrift_plain.outside_current > 200, "current falls below the calibrated interval");
+    assert(refdrift.bad_accepted < refdrift_plain.bad_accepted, "guard reduces wrong values");
+
+    // O2 dips: transient, so no drift latch; steep edges trip the rate check, the floor trips the range check.
+    let dips = replay(o2_dips_current_pa(), cal, policy, true);
+    let dips_plain = replay(o2_dips_current_pa(), cal, policy, false);
+    show("O2 dips guarded", dips);
+    show("O2 dips plain", dips_plain);
+    assert(dips.drift == 0, "dips must not latch drift");
+    assert(dips.rate >= 4, "rate check fires on the steep edges");
+    assert(dips.outside_current >= 10, "dip floor is below the calibrated interval");
+    assert(dips.bad_accepted < dips_plain.bad_accepted, "guard removes some wrong values");
+    assert(dips.bad_accepted > 0, "a rate limit cannot catch every dip sample");
+    assert(dips.ready > 800, "recovers after each dip");
+
+    // Stale calibration: same nominal trace, 24 h calibration lifetime.
+    let short_life = stress_policy();
+    short_life.max_calibration_age_ms = 86400000;
+    let stale = replay(nominal_current_pa(), cal, short_life, true);
+    show("nominal, 24 h calibration life", stale);
+    assert(stale.ready == 289 && stale.expired == 575, "refuses after 24 h, accepts up to and including it");
+
+    println("Synthetic stress checks passed");
+}
+
+run_stress_tests();

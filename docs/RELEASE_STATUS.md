@@ -28,14 +28,15 @@ firmware, with inconsistent SDK/documentation units; CA RTIA is fixed at 10 kOhm
 It is not a current-protection limit. Disconnect does not automatically stop
 the upstream acquisition; confirm stopped status during reconnection/recovery.
 
-The new bridge logs measured raw current, labels missing metadata, and does not
-emit a live glucose estimate. A future framed sensor protocol should carry
-version, payload length, device sequence, acquisition time, raw current, actual
-temperature and timestamp, sensor/calibration identity, status and an integrity
-check. Session authentication/replay protection must be specified separately;
-the presence of Bluetooth does not establish it. No such firmware revision has
-been built or tested here. The upstream host GUI is available for bench current
-visualization; the package does not claim a complete new mobile CGM app.
+The patched firmware (`firmware/biocoin-patches`) and the strip-rig firmware now
+send the framed protocol in `docs/PROTOCOL.md`: version, length, device
+sequence, device time, raw current, temperature, status, sensor and calibration
+identity, CRC. The patch also makes CA RTIA host-configurable (default 512 kOhm).
+Both firmwares build; neither has run on hardware. The patched Biocoin no longer
+emits the float stream the upstream GUI reads, and still does not stop
+acquisition on disconnect. Session authentication and replay protection remain
+unspecified. The bridge emits glucose only with a matching calibration and
+valid temperature.
 
 ## Verification actually performed
 

@@ -1,0 +1,165 @@
+{
+  "revision": "B1",
+  "units": "mm",
+  "status": "product concept; no physical fit or material testing",
+  "parameters": {
+    "pod": {
+      "a": 13.8,
+      "b": 11.7,
+      "n": 3.0,
+      "height": 5.7,
+      "crown": 0.3,
+      "wall": 1.0,
+      "floor": 1.0,
+      "bottom_round": 0.5,
+      "top_round": 2.0
+    },
+    "base": {
+      "margin": 1.4,
+      "floor": 0.8,
+      "rim": 1.4,
+      "clearance": 0.15
+    },
+    "patch": {
+      "a": 23.0,
+      "b": 19.5,
+      "n": 2.2,
+      "thickness": 0.4,
+      "taper": 2.5
+    },
+    "filament": {
+      "diameter": 0.35,
+      "length": 6.0
+    },
+    "stack": {
+      "board": [
+        22.0,
+        18.0,
+        3.0
+      ],
+      "board_thickness": 0.8,
+      "component_height": 0.6,
+      "module_height": 1.0,
+      "tape": 0.1,
+      "cell": [
+        18.0,
+        9.0,
+        2.0
+      ],
+      "cell_y": -4.0,
+      "gap": 0.2
+    }
+  },
+  "assembly_z_mm": {
+    "patch": 0.0,
+    "base": 0.4,
+    "filament": 0.0,
+    "pod_floor": 1.2000000000000002,
+    "pod_shell": 1.2000000000000002
+  },
+  "fit": {
+    "interior_height_mm": 3.7,
+    "stack_height_needed_mm": 3.7,
+    "height_ok": true,
+    "board_fits": true,
+    "cell_fits": true,
+    "pod_mm": [
+      27.6,
+      23.4,
+      6.0
+    ],
+    "on_skin_height_mm": 7.2
+  },
+  "meshes": {
+    "pod_shell": {
+      "triangles": 14080,
+      "nonmanifold_edges": 0,
+      "winding_errors": 0,
+      "volume_mm3": 874.74,
+      "bounds_mm": [
+        [
+          -13.8,
+          -11.7,
+          1.0
+        ],
+        [
+          13.8,
+          11.7,
+          6.0
+        ]
+      ]
+    },
+    "pod_floor": {
+      "triangles": 3200,
+      "nonmanifold_edges": 0,
+      "winding_errors": 0,
+      "volume_mm3": 565.71,
+      "bounds_mm": [
+        [
+          -13.8,
+          -11.7,
+          0.0
+        ],
+        [
+          13.8,
+          11.7,
+          1.0
+        ]
+      ]
+    },
+    "base": {
+      "triangles": 6720,
+      "nonmanifold_edges": 0,
+      "winding_errors": 0,
+      "volume_mm3": 725.84,
+      "bounds_mm": [
+        [
+          -15.6,
+          -13.226,
+          0.0
+        ],
+        [
+          15.6,
+          13.226,
+          2.194
+        ]
+      ]
+    },
+    "patch": {
+      "triangles": 960,
+      "nonmanifold_edges": 0,
+      "winding_errors": 0,
+      "volume_mm3": 529.7,
+      "bounds_mm": [
+        [
+          -23.0,
+          -19.5,
+          0.0
+        ],
+        [
+          23.0,
+          19.5,
+          0.4
+        ]
+      ]
+    },
+    "filament": {
+      "triangles": 1920,
+      "nonmanifold_edges": 0,
+      "winding_errors": 0,
+      "volume_mm3": 0.57,
+      "bounds_mm": [
+        [
+          -0.175,
+          -0.175,
+          -6.0
+        ],
+        [
+          0.175,
+          0.175,
+          0.0
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,134 @@
+use "glucose_core.rz";
+
+// Guards that sit on top of `evaluate`: calibration expiry, drift found by reference
+// checks, and physiologically implausible rates. Pure integer code, no state kept here:
+// the caller owns GuardState and passes it back in. Thresholds are caller policy.
+
+struct GuardPolicy {
+    int max_calibration_age_ms,
+    int min_sensitivity_permille,
+    int max_sensitivity_permille,
+    int max_rate_mgdl_per_min_x10,
+    int rate_window_ms,
+}
+
+struct GuardState {
+    bool drift_flagged,
+    int last_check_permille,
+    bool has_last,
+    int last_mgdl,
+    int last_time_ms,
+}
+
+fn guard_policy_valid(GuardPolicy policy) -> bool {
+    if policy.max_calibration_age_ms < 1 || policy.max_calibration_age_ms > 2000000000 { return false; }
+    if policy.min_sensitivity_permille < 1 { return false; }
+    if policy.max_sensitivity_permille <= policy.min_sensitivity_permille { return false; }
+    if policy.max_sensitivity_permille > 100000 { return false; }
+    if policy.max_rate_mgdl_per_min_x10 < 1 || policy.max_rate_mgdl_per_min_x10 > 10000 { return false; }
+    if policy.rate_window_ms < 1 || policy.rate_window_ms > 3600000 { return false; }
+    return true;
+}
+
+fn fresh_guard_state() -> GuardState {
+    return new GuardState {
+        drift_flagged: false,
+        last_check_permille: -1000000,
+        has_last: false,
+        last_mgdl: 0,
+        last_time_ms: 0,
+    };
+}
+
+// Observed over expected current for a reference measurement taken while the sensor was in
+// use, in permille. The expected current is the calibration line at the reference glucose, so
+// a pure gain change reads as that gain (1000 = unchanged) and an added baseline reads high.
+// -1000000 = the check cannot be used (invalid calibration, reference outside the calibrated
+// interval above its low point, expected current of zero, or current out of bounds).
+fn sensitivity_permille(int reference_mgdl, int observed_pa, Calibration cal) -> int {
+    if calibration_valid(cal) == false { return -1000000; }
+    if reference_mgdl <= cal.low_glucose_mgdl || reference_mgdl > cal.high_glucose_mgdl { return -1000000; }
+    if observed_pa < -1000000000 || observed_pa > 1000000000 { return -1000000; }
+    let glucose_span = cal.high_glucose_mgdl - cal.low_glucose_mgdl;
+    let current_span = cal.high_current_pa - cal.low_current_pa;
+    let reference_rise = reference_mgdl - cal.low_glucose_mgdl;
+    // expected = low + rise * current_span / glucose_span, scaled by glucose_span to stay in integers
+    let expected_scaled = cal.low_current_pa * glucose_span + reference_rise * current_span;
+    if expected_scaled == 0 { return -1000000; }
+    let numerator = observed_pa * glucose_span * 1000;
+    let denominator = expected_scaled;
+    if denominator < 0 {
+        denominator = 0 - denominator;
+        numerator = 0 - numerator;
+    }
+    let half = denominator / 2;
+    if numerator < 0 {
+        let down = numerator - half;
+        return down / denominator;
+    }
+    let up = numerator + half;
+    return up / denominator;
+}
+
+fn sensitivity_in_policy(int permille, GuardPolicy policy) -> bool {
+    return permille >= policy.min_sensitivity_permille && permille <= policy.max_sensitivity_permille;
+}
+
+// A usable check outside the policy band latches the drift flag until the next calibration
+// (fresh_guard_state). An unusable check changes nothing; a later in-band check does not clear
+// a flag, because one good reading cannot prove a sensor that already failed one is stable.
+fn record_reference_check(GuardState state, int permille) -> GuardState {
+    let next = state;
+    if permille == -1000000 { return next; }
+    next.last_check_permille = permille;
+    return next;
+}
+
+fn apply_check_policy(GuardState state, GuardPolicy policy) -> GuardState {
+    let next = state;
+    if next.last_check_permille != -1000000 && sensitivity_in_policy(next.last_check_permille, policy) == false {
+        next.drift_flagged = true;
+    }
+    return next;
+}
+
+fn check_reference(GuardState state, int reference_mgdl, int observed_pa, Calibration cal, GuardPolicy policy) -> GuardState {
+    let permille = sensitivity_permille(reference_mgdl, observed_pa, cal);
+    return apply_check_policy(record_reference_check(state, permille), policy);
+}
+
+fn rate_exceeds(int previous_mgdl, int previous_ms, int mgdl, int now_ms, GuardPolicy policy) -> bool {
+    let dt = now_ms - previous_ms;
+    if dt <= 0 || dt > policy.rate_window_ms { return false; }
+    let delta = mgdl - previous_mgdl;
+    if delta < 0 { delta = 0 - delta; }
+    return delta * 600000 > policy.max_rate_mgdl_per_min_x10 * dt;
+}
+
+// `calibration_age_ms` is time since the calibration was made, from the receiver's monotonic
+// clock (-1 for an invalid clock). Order of refusal: configuration, calibration expiry,
+// latched drift, then the core checks, then rate of change.
+fn evaluate_guarded(SensorSample sample, Calibration cal, int max_age_ms, int calibration_age_ms, int now_ms,
+                    GuardPolicy policy, GuardState state) -> Evaluation {
+    if guard_policy_valid(policy) == false { return unavailable("invalid_configuration"); }
+    if calibration_age_ms < 0 { return unavailable("calibration_clock_invalid"); }
+    if calibration_age_ms > policy.max_calibration_age_ms { return unavailable("calibration_expired"); }
+    if state.drift_flagged { return unavailable("calibration_drift"); }
+    let result = evaluate(sample, cal, max_age_ms);
+    if result.has_glucose == false { return result; }
+    if state.has_last && rate_exceeds(state.last_mgdl, state.last_time_ms, result.glucose_mgdl, now_ms, policy) {
+        return unavailable("implausible_rate");
+    }
+    return result;
+}
+
+// Call after every evaluate_guarded; only accepted readings become the rate baseline.
+fn note_reading(GuardState state, Evaluation result, int now_ms) -> GuardState {
+    let next = state;
+    if result.has_glucose {
+        next.has_last = true;
+        next.last_mgdl = result.glucose_mgdl;
+        next.last_time_ms = now_ms;
+    }
+    return next;
+}

@@ -7,7 +7,7 @@ import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'deliverables'
-SKIP={'.git','__pycache__','.resilient_cache','.venv','tmp','deliverables'}
+SKIP={'.git','__pycache__','.resilient_cache','.venv','tmp','deliverables','build','.pio'}
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 

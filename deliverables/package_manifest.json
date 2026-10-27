@@ -9,9 +9,14 @@
       "sha256": "6c173b09520bdd4b731791dcfd2831f9524de9e683dcc52a957a128aec8cc4b7"
     },
     {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 2079,
+      "sha256": "c0c57f839989075520c2e2994d220e3a35435c8ff630f6f6b51da5a7514339bd"
+    },
+    {
       "path": ".gitignore",
-      "bytes": 78,
-      "sha256": "f200bdaf670e5c95b61bda7f8ca86913131e82ef639be6e8425e4e87ef0c15b4"
+      "bytes": 91,
+      "sha256": "531082b53411c79bcf39e561ae37120d067f5e4db2766220112f8c380faa3fcf"
     },
     {
       "path": "LICENSE",
@@ -35,8 +40,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 5425,
-      "sha256": "4253714e331df922a184c267aeae7b75e9d76a6123b7233df0dd9b9730d3cf93"
+      "bytes": 2418,
+      "sha256": "9281edd7d6c84b424b8b623c71d3f923663668fce3d86a28aa28164589f94220"
+    },
+    {
+      "path": "docs/A0_PACKAGE.md",
+      "bytes": 5493,
+      "sha256": "ce192b94895a001fcbd588cd2a20ab95e30fdb233fc4c3519c4ae3a07cb51893"
     },
     {
       "path": "docs/ATTRIBUTION.md",
@@ -64,6 +74,16 @@
       "sha256": "df3a9e80e63acfca81bab95d45b1ee685e05e65e3866ac1fbf344aaf0a59bfa5"
     },
     {
+      "path": "docs/PRIOR_ART.md",
+      "bytes": 16836,
+      "sha256": "3eaf5f3c2c48f1891fb31ea6cf391388e825820bd9b181395b40c01638692bf6"
+    },
+    {
+      "path": "docs/PROTOCOL.md",
+      "bytes": 4274,
+      "sha256": "c19ee3ddaffa28beb2992712f74c3347c8748654fad7d1a7a5778bac9ec89d60"
+    },
+    {
       "path": "docs/RELEASE_STATUS.md",
       "bytes": 4082,
       "sha256": "f34141b32a7e051d1eccf2d42845c8a2bf418ea49c52e3edc4166ba736e71f59"
@@ -72,6 +92,96 @@
       "path": "docs/SENSOR_PROCESS.md",
       "bytes": 14494,
       "sha256": "06731934dd4e77cb7fd643f7fb5266f305fea60919e03fc724278a477a590c99"
+    },
+    {
+      "path": "docs/assets/base.stl",
+      "bytes": 336084,
+      "sha256": "33ef24d333eb7645628979cf9f4787d2741fc3f138e0681d6aef908630955fef"
+    },
+    {
+      "path": "docs/assets/filament.stl",
+      "bytes": 96084,
+      "sha256": "e6f15fbd072d47f8f3624c00cc07d5cd3fdfaf11409adbe6f487e25421075c47"
+    },
+    {
+      "path": "docs/assets/model.png",
+      "bytes": 120048,
+      "sha256": "18d76b6e77a025e4c39b04853f724dd4041ba0d210527cfceebbb9db2424d8a0"
+    },
+    {
+      "path": "docs/assets/patch.stl",
+      "bytes": 48084,
+      "sha256": "b638cf48eb4488d891035e07b147f7714eeb0dbf630e1c4364b836cc922dcc56"
+    },
+    {
+      "path": "docs/assets/pod_floor.stl",
+      "bytes": 160084,
+      "sha256": "d822792243ebca8690ad373073da63044e1bd1cacde0f274219b3f499368d110"
+    },
+    {
+      "path": "docs/assets/pod_shell.stl",
+      "bytes": 704084,
+      "sha256": "c21db419868eff44b81f91b85e3c22cfe1ef5df46d4db255935013b09adc7d4c"
+    },
+    {
+      "path": "docs/index.html",
+      "bytes": 16259,
+      "sha256": "83c820ced83d480b1834c9f294faf6c131493aa21b38ce8d256671b5e10a4aa3"
+    },
+    {
+      "path": "firmware/biocoin-patches/0001-ca-rtia-and-ock-frames.patch",
+      "bytes": 10580,
+      "sha256": "f12fb25cee734fc23d6320c39cf177d3f3211d81f8f7a13efbd63d607febe650"
+    },
+    {
+      "path": "firmware/biocoin-patches/apply.sh",
+      "bytes": 939,
+      "sha256": "0fac1730600abde41be6797957fe98098d3360b24a080cd19df624b4a7b5a9c0"
+    },
+    {
+      "path": "firmware/biocoin-patches/patched.sha256",
+      "bytes": 408,
+      "sha256": "c9a58ad474b32cf2f3a2efb217ffdf658142945a38bc00d77f2b9e63bc596859"
+    },
+    {
+      "path": "firmware/biocoin-patches/upstream.sha256",
+      "bytes": 321,
+      "sha256": "bac517eb9be81ba8beb80b561db7952829f8ec386367831cdaeab1ff3d322370"
+    },
+    {
+      "path": "firmware/common/ock_frame.h",
+      "bytes": 3742,
+      "sha256": "c8a2310160b40a29ef21914b243b24784146b6fb0bfccaeeb26162dc49ecc9a5"
+    },
+    {
+      "path": "firmware/common/test/test_ock_frame.c",
+      "bytes": 1102,
+      "sha256": "5217ffe34364ed0a0b86c8db17fa119d0ee6f133cd98a3e5812e394b03f89f03"
+    },
+    {
+      "path": "firmware/strip-rig/README.md",
+      "bytes": 1344,
+      "sha256": "a34ff2b9aae0d97831cb54fd61eb5ba73f23fae6db1192de7f5866c27c4db4f7"
+    },
+    {
+      "path": "firmware/strip-rig/platformio.ini",
+      "bytes": 658,
+      "sha256": "242a8553533010c43409a74033969d2555468d5ff0e16377cd5ec6a5ec1103e3"
+    },
+    {
+      "path": "firmware/strip-rig/src/lmp91000.h",
+      "bytes": 3630,
+      "sha256": "b353e6da8bf035c8b21efe235e9dbaee9d17e04fd638c830183695d4c1694383"
+    },
+    {
+      "path": "firmware/strip-rig/src/main.cpp",
+      "bytes": 11755,
+      "sha256": "d4ab797e39121fbf2a58c4736da60d87826857a5af06440a6ad7eb31c7866067"
+    },
+    {
+      "path": "firmware/strip-rig/test/test_lmp91000/test_main.cpp",
+      "bytes": 2139,
+      "sha256": "73d2b73590c58e91be429db904c75df064918bd682d62b35ee3a52573d201ed4"
     },
     {
       "path": "hardware/electrode_A0.kicad_pcb",
@@ -97,6 +207,101 @@
       "path": "hardware/electrode_A0_layers.dxf",
       "bytes": 21891,
       "sha256": "fc4431244900709eeba9929e73240368e7ce69e4929f271cd35d33d95b93705f"
+    },
+    {
+      "path": "hardware/ock_p1/README.md",
+      "bytes": 3348,
+      "sha256": "003107f1e46ff368235b5c0aee89b1b6af1df37e49ea1f908fba561eeae25673"
+    },
+    {
+      "path": "hardware/ock_p1/build_board.py",
+      "bytes": 19716,
+      "sha256": "39327ac0564d34302184ea32efd4b49481553a370db2c9a5b9f3bf3f534e5dab"
+    },
+    {
+      "path": "hardware/ock_p1/fp-lib-table",
+      "bytes": 127,
+      "sha256": "99aa2a02b75324dc1eac6dffdc206116d758cc1e9186a81d5c07412ef00c5434"
+    },
+    {
+      "path": "hardware/ock_p1/make.sh",
+      "bytes": 899,
+      "sha256": "98d95d532a69a6d137d64c31dcbe1025bc799fd04bea85fb6efb5b34eb0570e9"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.kicad_pcb",
+      "bytes": 187755,
+      "sha256": "c0ed08dc46b8a90b84849cc061a13f32ab97c5c1097e1bda2ef03461b835aee6"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.kicad_prl",
+      "bytes": 2293,
+      "sha256": "648d31cdc9ed86203e058dd239a3dd94f89f734ccfbab7e4cc397f7e3e8d691c"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.kicad_pro",
+      "bytes": 1452,
+      "sha256": "f0ff9f8445d657f3ea76df6cb78c5260501f0e183f1a3f80563bb4f8c9751a9c"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.pretty/0201 FERRITE.kicad_mod",
+      "bytes": 12418,
+      "sha256": "43eaa5ebf49de3d6eba504727f8351d80bcd216fef101db2cb37a5e27a45decc"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.pretty/21-0217D_W61B1-1_MXM.kicad_mod",
+      "bytes": 8851,
+      "sha256": "faec55e63fc6bee06aa15a672578ccfdc60e8d739eaa4b69c497c3aba4d28670"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.pretty/BGA6C50P2X3_145X95X62.kicad_mod",
+      "bytes": 10616,
+      "sha256": "7d8a3d7d2e28c6fd0c8ed2a215926d299b2a6ec8d0c91f6f6abaa0b854939195"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.pretty/BatteryTab_1.2x2.0mm.kicad_mod",
+      "bytes": 1002,
+      "sha256": "dc0404dfbbfa41c49cfe1d8bdd8859adc0eb7b50de7c737c95108b02bbfe1427"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.pretty/CB-56-3_ADI.kicad_mod",
+      "bytes": 23786,
+      "sha256": "31a50f3ddcc491cfe88f843702defaa3d86d03b6c051699b575843a12f928d17"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.pretty/ContactPad_D1.6mm.kicad_mod",
+      "bytes": 975,
+      "sha256": "ddc4406793ec61d140519270d678074e2205f161213f821d369962a510e8d186"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1.pretty/InsightSiP_ISP1807_LGA-78_8x8mm.kicad_mod",
+      "bytes": 14945,
+      "sha256": "6df82b4aeb1831260d80ad083463f181ea7ff4a73d035bc57dbf13274928e83c"
+    },
+    {
+      "path": "hardware/ock_p1/ock_p1_bom.csv",
+      "bytes": 2017,
+      "sha256": "03399431c1e850e3c86314365d668a809f826e65161fe51d12c5b35434e365e2"
+    },
+    {
+      "path": "hardware/ock_p1/power_budget.py",
+      "bytes": 2279,
+      "sha256": "6d46d657b64dde18a22ff19914bdc972c1ad9ed6534b17fc4236901f4ba2ebc1"
+    },
+    {
+      "path": "hardware/ock_p1/render_bottom.png",
+      "bytes": 144592,
+      "sha256": "99309108d5a48e6ac7ae9bdfeb2de51c71e0a1791210ff409d570fd90cbcce3c"
+    },
+    {
+      "path": "hardware/ock_p1/render_top.png",
+      "bytes": 301157,
+      "sha256": "2716b981db2764c5d466e8de1132d5a38efcec71d72856556a912c48f7dfc58a"
+    },
+    {
+      "path": "hardware/ock_p1/route_board.py",
+      "bytes": 1035,
+      "sha256": "d51afc676e07ab61f88b447954953d65f72581aaa8f8506a2998779c3cf8ba8a"
     },
     {
       "path": "mechanical/generated/adhesive_pad_diecut_A0.dxf",
@@ -144,19 +349,189 @@
       "sha256": "ce9ab3bba3a7f23e154dfc9a248b2dba329f60eac02cda3f14e992ade03730ef"
     },
     {
+      "path": "mechanical/product_B1/base.stl",
+      "bytes": 336084,
+      "sha256": "33ef24d333eb7645628979cf9f4787d2741fc3f138e0681d6aef908630955fef"
+    },
+    {
+      "path": "mechanical/product_B1/filament.stl",
+      "bytes": 96084,
+      "sha256": "e6f15fbd072d47f8f3624c00cc07d5cd3fdfaf11409adbe6f487e25421075c47"
+    },
+    {
+      "path": "mechanical/product_B1/patch.stl",
+      "bytes": 48084,
+      "sha256": "b638cf48eb4488d891035e07b147f7714eeb0dbf630e1c4364b836cc922dcc56"
+    },
+    {
+      "path": "mechanical/product_B1/patch_diecut.svg",
+      "bytes": 3365,
+      "sha256": "fb9dca665eb311e7438b3d5ae692d5d86bcd136abafc470c87526e36e3d3c3e4"
+    },
+    {
+      "path": "mechanical/product_B1/pod_floor.stl",
+      "bytes": 160084,
+      "sha256": "d822792243ebca8690ad373073da63044e1bd1cacde0f274219b3f499368d110"
+    },
+    {
+      "path": "mechanical/product_B1/pod_shell.stl",
+      "bytes": 704084,
+      "sha256": "c21db419868eff44b81f91b85e3c22cfe1ef5df46d4db255935013b09adc7d4c"
+    },
+    {
+      "path": "mechanical/product_B1/product_B1.json",
+      "bytes": 2826,
+      "sha256": "236b4af4a366d24b2c77a3d9c8af35f63869702324c0c2e7473c3e3f4c42c42a"
+    },
+    {
+      "path": "mechanical/product_B1/render.png",
+      "bytes": 113115,
+      "sha256": "351be1f4acd62fdc27bcf59a18bbbaf839dc0f62e558ad423a52f01e66c3fc4c"
+    },
+    {
+      "path": "mechanical/product_B1.py",
+      "bytes": 11359,
+      "sha256": "dc9173b4f45f7ba352920586b493d9b38c1774b5fe96664077e2fd37883bdef5"
+    },
+    {
+      "path": "models/README.md",
+      "bytes": 8443,
+      "sha256": "88ecbaee004520d6d75dbb8b3a2dcc7652acf48203c6273e0aa973f99a7ca06a"
+    },
+    {
+      "path": "models/electrode_model.py",
+      "bytes": 26454,
+      "sha256": "ff9b5648283a800ba1ad4deaa3cf6b9185f38de3ec883dd2dd5f6d6cd8a295cf"
+    },
+    {
+      "path": "models/fit.py",
+      "bytes": 7099,
+      "sha256": "d03984fa03bb7a6cc287cb7e96b8fbf454831457c6f4412d2467d4a8c202df21"
+    },
+    {
+      "path": "models/geometry_2d.py",
+      "bytes": 21798,
+      "sha256": "13238cf1b978c0b4d432c6d1730c526d7e5e9399e50b7d5e293aa3f3d77eff40"
+    },
+    {
+      "path": "models/out/example_bench_synthetic.csv",
+      "bytes": 554,
+      "sha256": "839eadff7760274eed4b1ee0e5cf412a6581538788b1ea7641cca17f235d2db0"
+    },
+    {
+      "path": "models/out/fit_example.json",
+      "bytes": 1572,
+      "sha256": "8d5c3c1bc07c1ab40f6b01403355f4b5f7c9e4e1b98dcd1f849e899c8f762164"
+    },
+    {
+      "path": "models/out/geometry_2d.json",
+      "bytes": 9685,
+      "sha256": "1394748cf51e0444e59fc08fd44969ad1bfa6c681ceb55a29c6595171fcef1d9"
+    },
+    {
+      "path": "models/out/geometry_2d.png",
+      "bytes": 66831,
+      "sha256": "61329182dc8dec2c0dd72200c44ce8a6ac32d7129a5238a67933fbc93f69bf67"
+    },
+    {
+      "path": "models/out/model.png",
+      "bytes": 120048,
+      "sha256": "18d76b6e77a025e4c39b04853f724dd4041ba0d210527cfceebbb9db2424d8a0"
+    },
+    {
+      "path": "models/out/report.json",
+      "bytes": 11227,
+      "sha256": "dce5a3757cfc30fe2d246936d650bfa173c118f19c8f4048a38641e27b255254"
+    },
+    {
+      "path": "models/out/synthetic_trace_enzyme_loss.csv",
+      "bytes": 29076,
+      "sha256": "ae9c7128863fd426cb09167743bd20229d7150853fab5b6a150ebbaa4500d4fd"
+    },
+    {
+      "path": "models/out/synthetic_trace_fouling.csv",
+      "bytes": 29043,
+      "sha256": "36af2ec827fd6e54737a508c79ad5fcdd50dbfa20a6d04cd5976e61dc06f4a17"
+    },
+    {
+      "path": "models/out/synthetic_trace_gox_pu.csv",
+      "bytes": 49044,
+      "sha256": "9a3e5e552eb37947bb768b9bd3c6b5f9fb95ac54e4c7be17041f20b80ea10640"
+    },
+    {
+      "path": "models/out/synthetic_trace_nominal.csv",
+      "bytes": 29185,
+      "sha256": "2bad51ee5f37c8d2b1a6a2f29e4135b62aa3b13322bfa5cee98714d068b80140"
+    },
+    {
+      "path": "models/out/synthetic_trace_o2_dips.csv",
+      "bytes": 29173,
+      "sha256": "c4be051043fdee09bab9df0fe78eced2b0c023008524ec4f2368d3bba0bbf250"
+    },
+    {
+      "path": "models/out/synthetic_trace_reference_drift.csv",
+      "bytes": 28846,
+      "sha256": "49c074397cf8f329e2223ff94c32dc3ca2cd5f899b185b12dcf633d675fdf06c"
+    },
+    {
+      "path": "models/stress_fixtures.py",
+      "bytes": 3290,
+      "sha256": "3f951fe951e03ec9453020fbc39e42851a74761c382deb5622ae40beaace81d7"
+    },
+    {
+      "path": "models/test_electrode_model.py",
+      "bytes": 5205,
+      "sha256": "f2825f0680521bc04decc7057125b96f68e0dd0b106bea027b473f5d71d37aa7"
+    },
+    {
+      "path": "models/test_fit.py",
+      "bytes": 2195,
+      "sha256": "c1ee835ecfe833a730dea4eaa7a11e5967b21979908bb56c64bc06bcc9ad18fe"
+    },
+    {
+      "path": "models/test_geometry_2d.py",
+      "bytes": 3724,
+      "sha256": "d4b16412157e6ebbe33d84b63e69d4d8a08a8b166e6bcfc071bf811c2a7be71a"
+    },
+    {
+      "path": "models/test_stress.py",
+      "bytes": 3192,
+      "sha256": "445259a788556fa1d85ce941a12d9be1f4d76bcc1a69516edfe105bf5619aabb"
+    },
+    {
       "path": "software/README.md",
       "bytes": 1347,
       "sha256": "1d011c5fe9fa09404cc5596e9f3881dde7525bc418a7557e6fd132828c7503ee"
     },
     {
       "path": "software/bridge/README.md",
-      "bytes": 4713,
-      "sha256": "1ff418547e3d255063131f69b0fe79bfdd3399fb9c0341c666d985c410445a30"
+      "bytes": 5708,
+      "sha256": "39986cacfb45cefc8744c52b629e0364c130f5d9b4c3f24e654dbd1f690084e7"
     },
     {
       "path": "software/bridge/biocoin_bridge.py",
-      "bytes": 14647,
-      "sha256": "985f7dd35283600120c2c147741461425f18a249869ae3670299eb32f148aa95"
+      "bytes": 28986,
+      "sha256": "db9cd19b97be753edd333509a271d24308cdd725ad82b710c0569efd607b7ca2"
+    },
+    {
+      "path": "software/bridge/fixtures/make_fixtures.py",
+      "bytes": 1654,
+      "sha256": "779d3775812881821755953807ce81e3f3f5cea02a96f622e81ef0774c54c91e"
+    },
+    {
+      "path": "software/bridge/fixtures/strip_rig_calibration.json",
+      "bytes": 209,
+      "sha256": "d7ed622a07f350afa9a3b92d4b981a86bf2f4f0e31ef1971de2a841e8fcfd958"
+    },
+    {
+      "path": "software/bridge/fixtures/strip_rig_session.hex",
+      "bytes": 579,
+      "sha256": "6edf1ee3b33e72d334f0091e3f1a0563c3effac0ade388ef8b2bef848709f935"
+    },
+    {
+      "path": "software/bridge/ock_protocol.py",
+      "bytes": 9996,
+      "sha256": "159b5d3cf2c3fa48777f852c95752938b74d73e7a617a1b61289543c0ab2003b"
     },
     {
       "path": "software/bridge/requirements.txt",
@@ -169,9 +544,24 @@
       "sha256": "b8e541079ccab54b0f4f0141e153e8908c8e3a6624a0842cecf52f52a2f9ab6d"
     },
     {
+      "path": "software/bridge/test_ock_bridge.py",
+      "bytes": 5740,
+      "sha256": "39b3a196763dfdb0db903b082ebd7c7b5670c7bd4f288ce698f4946d4004fd49"
+    },
+    {
+      "path": "software/bridge/test_ock_protocol.py",
+      "bytes": 8304,
+      "sha256": "6ca00fcbefa4169460e5658dae2378d62e1ff64830fe2139de30bec70ef0d983"
+    },
+    {
       "path": "software/resilient/README.md",
-      "bytes": 4200,
-      "sha256": "8036c0806d8e80d5f492ae62705acd113be72777facaf9e68ad9b890362c4a77"
+      "bytes": 5816,
+      "sha256": "6e3085e336662e290bc2a7030f57331b914aa882eab08f95d4d49cfdd0e4ab6b"
+    },
+    {
+      "path": "software/resilient/calibration_guard.rz",
+      "bytes": 6042,
+      "sha256": "cb5d022bbff9e9c5c7020d1c7600a2a81a468baa74bcc855a398b2e65d672525"
     },
     {
       "path": "software/resilient/core_tests.rz",
@@ -189,9 +579,24 @@
       "sha256": "383e40582f59953882c3f8e421dcf7146866340fbcdfdb71df747d517117a633"
     },
     {
+      "path": "software/resilient/guard_tests.rz",
+      "bytes": 6515,
+      "sha256": "fa69e9caf840d4a3ef8e8129fa3d079748636990bef18f3c10c40997e4795314"
+    },
+    {
       "path": "software/resilient/run_checks.sh",
-      "bytes": 339,
-      "sha256": "4ee8338150e2e0e169259caf014f2437ebfd596a4b4ff2ff1af4f4eea55a952c"
+      "bytes": 306,
+      "sha256": "8a34a65ff8d82a5a30336f02ed6b495cb0eb946303ccb0526a4ee12882213dea"
+    },
+    {
+      "path": "software/resilient/stress_fixtures.rz",
+      "bytes": 39780,
+      "sha256": "5d8cfad95bb8a95da664b6ff0d4a16b43b73ff3f7dae251019f008dfd73f4396"
+    },
+    {
+      "path": "software/resilient/stress_tests.rz",
+      "bytes": 6606,
+      "sha256": "1b2cccf6f83c8a5da5cb75affec5e6649358fb81f06169f54f74f4dcc1c9a9fe"
     },
     {
       "path": "software/resilient/synthetic_fixtures.rz",
@@ -205,8 +610,8 @@
     },
     {
       "path": "tools/package_release.py",
-      "bytes": 2921,
-      "sha256": "a0764c92de5450430e34b7e3c03753083313e77956e438597bd67f64bc538ac6"
+      "bytes": 2962,
+      "sha256": "7dbdc0e676194000e7dc596a198675bd6b3b7a75e0d02ad1629e83f75f8ba4a9"
     },
     {
       "path": "tools/requirements-cad.txt",
